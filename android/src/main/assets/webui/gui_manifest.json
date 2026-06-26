@@ -1,0 +1,27 @@
+{
+    "version": "1.0.0",
+    "build_date": "2026-06-01T19:39:36.338554",
+    "engine": "Ultima-Grid Renderer v1",
+    "assets": [
+        {
+            "id": "fader_knob",
+            "type": "svg",
+            "optimized": true
+        },
+        {
+            "id": "strobe_icon",
+            "type": "vector",
+            "optimized": true
+        },
+        {
+            "id": "laser_grid",
+            "type": "canvas_layer",
+            "optimized": true
+        }
+    ],
+    "theme_metadata": {
+        "primary_glow": "#00FFCC",
+        "secondary_glow": "#FF007F",
+        "background": "#0b0f19"
+    }
+}

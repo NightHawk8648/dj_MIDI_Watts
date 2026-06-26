@@ -1,0 +1,8 @@
+[
+{
+  "directory": "C:/Users/Night/dj_MIDI_Watts/desktop/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -g -std=gnu++17 -o CMakeFiles\\hardware_manager.dir\\main.cpp.obj -c C:\\Users\\Night\\dj_MIDI_Watts\\desktop\\hardware_manager\\main.cpp",
+  "file": "C:/Users/Night/dj_MIDI_Watts/desktop/hardware_manager/main.cpp",
+  "output": "C:/Users/Night/dj_MIDI_Watts/desktop/build/CMakeFiles/hardware_manager.dir/main.cpp.obj"
+}
+]

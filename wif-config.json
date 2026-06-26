@@ -1,0 +1,12 @@
+{
+  "description": "WIF Provider Config for DJ MIDI WATTS",
+  "attributeMapping": {
+    "google.subject": "assertion.sub",
+    "attribute.repository": "assertion.repository",
+    "attribute.application": "assertion.azp",
+    "attribute.grid_tier": "assertion.grid_tier || '6'",
+    "attribute.username": "assertion.email.split('@')[0]",
+    "attribute.ide_origin": "assertion.origin == 'vscode' ? 'dev_client' : 'android_studio_host'"
+  },
+  "attributeCondition": "308012414081-87nplbju9ilom420b0krps5ij0aqunva.apps.googleusercontent.com"
+}

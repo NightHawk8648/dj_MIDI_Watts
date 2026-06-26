@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "christian-kohler.npm-intellisense",
+        "iar.iar-build",
+        "pluyckx.iar-vsc"
+    ]
+}

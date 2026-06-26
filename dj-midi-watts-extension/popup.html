@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ MIDI WATTS CONTROL</title>
+    <style>
+        body {
+            width: 380px;
+            margin: 0;
+            padding: 16px;
+            background-color: #0d1117;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #c9d1d9;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #21262d;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+        .title {
+            color: #58a6ff;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            margin: 0;
+        }
+        .status {
+            font-size: 10px;
+            background-color: rgb(56, 139, 253, 0.1);
+            color: #58a6ff;
+            border: 1px solid rgb(56, 139, 253, 0.3);
+            border-radius: 12px;
+            padding: 2px 8px;
+            font-weight: bold;
+        }
+        .status-online {
+            background-color: rgba(63, 185, 80, 0.15) !important;
+            color: #3fb950 !important;
+            border-color: rgba(63, 185, 80, 0.4) !important;
+        }
+        .status-partial {
+            background-color: rgba(210, 153, 34, 0.15) !important;
+            color: #d29922 !important;
+            border-color: rgba(210, 153, 34, 0.4) !important;
+        }
+        .status-offline {
+            background-color: rgba(248, 81, 73, 0.15) !important;
+            color: #f85149 !important;
+            border-color: rgba(248, 81, 73, 0.4) !important;
+        }
+        .faders-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            height: 120px;
+            margin-bottom: 16px;
+        }
+        .fader-col {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 8px 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .fader-label {
+            font-size: 9px;
+            font-weight: bold;
+            color: #8b949e;
+        }
+        .slider-wrapper {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 70px;
+        }
+        .slider-wrapper input[type="range"] {
+            transform: rotate(-90deg);
+            width: 60px;
+            height: 4px;
+            background: #30363d;
+            outline: none;
+            cursor: pointer;
+        }
+        .fader-val {
+            font-size: 9px;
+            color: #58a6ff;
+            font-family: monospace;
+            font-weight: bold;
+        }
+        .fx-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .fx-btn {
+            background-color: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #c9d1d9;
+            padding: 10px 4px;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .fx-btn:hover {
+            border-color: #8b949e;
+            background-color: #30363d;
+        }
+        .fx-btn.active {
+            background-color: rgb(255, 0, 127, 0.15);
+            color: #ff007f;
+            border-color: #ff007f;
+        }
+        .media-bar {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .btn-play {
+            background: #388bfd;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 14px;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-play:hover {
+            background: #4f9bfd;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="title">DJ MIDI WATTS BOARD</h1>
+        <div class="status" id="connection-status">DISCONNECTED</div>
+    </div>
+
+    <div style="font-size:10px; color:#8b949e; margin-bottom:8px; font-weight:bold;">SIGNAL EQUALIZER</div>
+    <div class="faders-grid">
+        <div class="fader-col">
+            <label class="fader-label" for="faderSub">SUB</label>
+            <div class="slider-wrapper">
+                <input type="range" id="faderSub" min="0" max="1" step="0.05" value="0.3">
+            </div>
+            <span class="fader-val" id="val-faderSub">30%</span>
+        </div>
+        <div class="fader-col">
+            <label class="fader-label" for="faderLow">LOW</label>
+            <div class="slider-wrapper">
+                <input type="range" id="faderLow" min="0" max="1" step="0.05" value="0.4">
+            </div>
+            <span class="fader-val" id="val-faderLow">40%</span>
+        </div>
+        <div class="fader-col">
+            <label class="fader-label" for="faderMid">MID</label>
+            <div class="slider-wrapper">
+                <input type="range" id="faderMid" min="0" max="1" step="0.05" value="0.5">
+            </div>
+            <span class="fader-val" id="val-faderMid">50%</span>
+        </div>
+        <div class="fader-col">
+            <label class="fader-label" for="faderVocal">VOCAL</label>
+            <div class="slider-wrapper">
+                <input type="range" id="faderVocal" min="0" max="1" step="0.05" value="0.5">
+            </div>
+            <span class="fader-val" id="val-faderVocal">50%</span>
+        </div>
+        <div class="fader-col">
+            <label class="fader-label" for="faderHigh">HIGH</label>
+            <div class="slider-wrapper">
+                <input type="range" id="faderHigh" min="0" max="1" step="0.05" value="0.6">
+            </div>
+            <span class="fader-val" id="val-faderHigh">60%</span>
+        </div>
+        <div class="fader-col">
+            <label class="fader-label" for="faderFog">FOG</label>
+            <div class="slider-wrapper">
+                <input type="range" id="faderFog" min="0" max="1" step="0.05" value="0.2">
+            </div>
+            <span class="fader-val" id="val-faderFog">20%</span>
+        </div>
+    </div>
+
+    <div style="font-size:10px; color:#8b949e; margin-bottom:8px; font-weight:bold;">ACTIVE STAGE TRIGGER GRID</div>
+    <div class="fx-grid">
+        <button class="fx-btn" id="btn-strobe">STROBE</button>
+        <button class="fx-btn" id="btn-fog">FOG GER</button>
+        <button class="fx-btn" id="btn-laser">LASER</button>
+        <button class="fx-btn" id="btn-spotify">SPOTIFY</button>
+    </div>
+
+    <div class="media-bar">   
+        <div style="font-size:11px; font-weight:bold; color:white;">MEDIA DECK DEPLOYED</div>
+        <div style="font-size:9px; color:#8b949e; margin-top:2px;" id="playing-track">NO ACTIVE TRACK</div>
+            <button class="btn-play" id="btn-playpause">PLAY</button>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

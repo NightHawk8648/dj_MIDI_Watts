@@ -1,0 +1,23 @@
+{
+  "cloud_env_path": "cloud_env.env",
+  "user_env_path": "user.env",
+  "gcp_credentials_path": "secrets/google-play-service.json",
+  "web_ui_src_path": "web-ui",
+  "web_ui_dist_path": "web-ui/dist",
+  "sync_engine_path": "scripts/sync_engine.py",
+  "android_app_path": "android",
+  "extension_path": "dj-midi-watts-extension",
+  "drivers_dir": "drivers",
+  "preboot_discover_script": "drivers/preboot_device_discovery.ps1",
+  "driver_setup_script": "drivers/setup_midi_drivers.ps1",
+  "device_registry": "drivers/device_registry.json",
+  "root_build_gradle": "build.gradle.kts",
+  "root_settings_gradle": "settings.gradle.kts",
+  "root_gradle_properties": "gradle.properties",
+  "app_build_gradle": "android/build.gradle.kts",
+  "gradle_daemon_properties": "gradle/gradle-daemon-jvm.properties",
+  "gradle_versions_catalog": "gradle/libs.versions.toml",
+  "gradle_wrapper_properties": "gradle/wrapper/gradle-wrapper.properties",
+  "gradlew_script": "gradlew",
+  "gradlew_bat": "gradlew.bat"
+}

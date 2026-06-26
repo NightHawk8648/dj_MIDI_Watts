@@ -1,0 +1,3 @@
+C:/Users/Night/dj_MIDI_Watts/desktop/hardware_manager/build/CMakeFiles/hardware_manager.dir
+C:/Users/Night/dj_MIDI_Watts/desktop/hardware_manager/build/CMakeFiles/edit_cache.dir
+C:/Users/Night/dj_MIDI_Watts/desktop/hardware_manager/build/CMakeFiles/rebuild_cache.dir

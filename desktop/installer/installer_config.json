@@ -1,0 +1,12 @@
+{
+  "appName": "DJ MIDI WATTS Desktop",
+  "version": "1.0.0",
+  "outputDirectory": "desktop/dist",
+  "mainExecutable": "desktop/bin/hardware_manager.exe",
+  "launcher": "desktop/index.js",
+  "includeDirs": [
+    "desktop/assets",
+    "desktop/src",
+    "drivers"
+  ]
+}

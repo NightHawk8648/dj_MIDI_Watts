@@ -1,0 +1,5 @@
+{
+  "mode": "auto",
+  "outputDir": "./devmirror-logs",
+  "captureDeprecationWarnings": true
+}

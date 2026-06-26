@@ -1,0 +1,223 @@
+Picked up JAVA_TOOL_OPTIONS: -Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8
+Downloading https://services.gradle.org/distributions/gradle-8.11.1-bin.zip
+.............10%.............20%.............30%.............40%.............50%.............60%.............70%.............80%.............90%.............100%
+
+Welcome to Gradle 8.11.1!
+
+Here are the highlights of this release:
+ - Parallel load and store for Configuration Cache
+ - Java compilation errors at the end of the build output
+ - Consolidated report for warnings and deprecations
+
+For more details see https://docs.gradle.org/8.11.1/release-notes.html
+
+Starting a Gradle Daemon (subsequent builds will be faster)
+Daemon JVM discovery is an incubating feature.
+
+> Configure project :app
+w: file:///C:/Users/Night/dj_MIDI_Watts/app/build.gradle.kts:100:5: 'jvmTarget: String' is deprecated. Please migrate to the compilerOptions DSL. More details are here: https://kotl.in/u1r8ln
+w: file:///C:/Users/Night/dj_MIDI_Watts/app/build.gradle.kts:257:9: 'exec(Action<ExecSpec>): ExecResult' is deprecated. This method will be removed in Gradle 9.0. Use ExecOperations.exec(Action) or ProviderFactory.exec(Action) instead.
+w: file:///C:/Users/Night/dj_MIDI_Watts/app/build.gradle.kts:313:13: 'exec(Action<ExecSpec>): ExecResult' is deprecated. This method will be removed in Gradle 9.0. Use ExecOperations.exec(Action) or ProviderFactory.exec(Action) instead.
+w: file:///C:/Users/Night/dj_MIDI_Watts/app/build.gradle.kts:319:9: 'exec(Action<ExecSpec>): ExecResult' is deprecated. This method will be removed in Gradle 9.0. Use ExecOperations.exec(Action) or ProviderFactory.exec(Action) instead.
+w: file:///C:/Users/Night/dj_MIDI_Watts/app/build.gradle.kts:445:13: 'exec(Action<ExecSpec>): ExecResult' is deprecated. This method will be removed in Gradle 9.0. Use ExecOperations.exec(Action) or ProviderFactory.exec(Action) instead.
+w: file:///C:/Users/Night/dj_MIDI_Watts/app/build.gradle.kts:496:13: 'exec(Action<ExecSpec>): ExecResult' is deprecated. This method will be removed in Gradle 9.0. Use ExecOperations.exec(Action) or ProviderFactory.exec(Action) instead.
+Warning: SDK processing. This version only understands SDK XML versions up to 3 but an SDK XML file of version 4 was encountered. This can happen if you use versions of Android Studio and the command-line tools that were released at different times.
+package.xml parsing problem. unexpected element (uri:"", local:"canary-number"). Expected elements are <{}codename>,<{}layoutlib>,<{}base-extension>,<{}api-level>,<{}extension-level>
+package.xml parsing problem. unexpected element (uri:"", local:"beta-api-level"). Expected elements are <{}codename>,<{}layoutlib>,<{}base-extension>,<{}api-level>,<{}extension-level>
+package.xml parsing problem. unexpected element (uri:"", local:"beta-number"). Expected elements are <{}codename>,<{}layoutlib>,<{}base-extension>,<{}api-level>,<{}extension-level>
+package.xml parsing problem. unexpected element (uri:"", local:"beta-api-level"). Expected elements are <{}codename>,<{}layoutlib>,<{}base-extension>,<{}api-level>,<{}extension-level>
+package.xml parsing problem. unexpected element (uri:"", local:"beta-number"). Expected elements are <{}codename>,<{}layoutlib>,<{}base-extension>,<{}api-level>,<{}extension-level>
+package.xml parsing problem. unexpected element (uri:"", local:"canary-number"). Expected elements are <{}codename>,<{}layoutlib>,<{}base-extension>,<{}api-level>,<{}extension-level>
+package.xml parsing problem. unexpected element (uri:"", local:"beta-api-level"). Expected elements are <{}codename>,<{}layoutlib>,<{}base-extension>,<{}api-level>,<{}extension-level>
+package.xml parsing problem. unexpected element (uri:"", local:"beta-number"). Expected elements are <{}codename>,<{}layoutlib>,<{}base-extension>,<{}api-level>,<{}extension-level>
+package.xml parsing problem. unexpected element (uri:"", local:"beta-api-level"). Expected elements are <{}codename>,<{}layoutlib>,<{}base-extension>,<{}api-level>,<{}extension-level>
+package.xml parsing problem. Errors limit exceeded. To receive all errors set com.sun.xml.bind logger to FINEST level.
+package.xml parsing problem. unexpected element (uri:"", local:"beta-number"). Expected elements are <{}codename>,<{}layoutlib>,<{}base-extension>,<{}api-level>,<{}extension-level>
+Checking the license for package Android SDK Build-Tools 35 in C:\Users\Night\AppData\Local\Android\Sdk\licenses
+License for package Android SDK Build-Tools 35 accepted.
+Preparing "Install Android SDK Build-Tools 35 v.35.0.0".
+"Install Android SDK Build-Tools 35 v.35.0.0" ready.
+Installing Android SDK Build-Tools 35 in C:\Users\Night\AppData\Local\Android\Sdk\build-tools\35.0.0
+"Install Android SDK Build-Tools 35 v.35.0.0" complete.
+"Install Android SDK Build-Tools 35 v.35.0.0" finished.
+
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:fixMissingWebUi SKIPPED
+> Task :app:verifyNodeVersion
+> Task :app:buildWebUi SKIPPED
+> Task :app:copyWebUiAssets SKIPPED
+> Task :app:generateDotEnv
+> Task :app:preBuild
+> Task :app:preDebugBuild
+> Task :app:generateDebugBuildConfig
+> Task :app:checkDebugAarMetadata
+
+Timed out waiting for finished message from client socket connection from /127.0.0.1:58350 to /127.0.0.1:57773. Discarding connection.
+
+> Task :app:generateDebugResValues
+> Task :app:mapDebugSourceSetPaths
+> Task :app:generateDebugResources
+> Task :app:packageDebugResources
+> Task :app:mergeDebugResources
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :app:parseDebugLocalResources
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :app:processDebugManifestForPackage
+> Task :app:processDebugResources
+> Task :app:kspDebugKotlin
+
+Exception in thread "AWT-EventQueue-0" java.lang.NullPointerException: Cannot invoke "ksp.com.intellij.openapi.application.Application.getService(java.lang.Class)" because the return value of "ksp.com.intellij.openapi.application.ApplicationManager.getApplication()" is null
+	at ksp.com.intellij.openapi.fileEditor.FileDocumentManager.getInstance(FileDocumentManager.java:35)
+	at ksp.com.intellij.openapi.fileTypes.BinaryFileTypeDecompilers.lambda$notifyDecompilerSetChange$1(BinaryFileTypeDecompilers.java:29)
+	at java.desktop/java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:318)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:771)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:722)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:716)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:86)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:741)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+
+> Task :app:compileDebugKotlin
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/MainActivity.kt:168:94 Unresolved reference 'BuildConfig'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:142:9 Conflicting declarations:
+var isPersonalCloudEnabled: <ERROR TYPE REF: Cannot infer argument for type parameter T>
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:144:9 Conflicting declarations:
+var isPersonalCloudEnabled: Boolean
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:144:32 Property delegate must have a 'getValue(CommanderViewModel, KMutableProperty1<CommanderViewModel, ERROR CLASS: Cannot infer argument for type parameter T>)' method. None of the following functions is applicable:
+fun <T> State<T>.getValue(thisObj: Any?, property: KProperty<*>): T
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:144:32 Property delegate must have a 'setValue(CommanderViewModel, KMutableProperty1<CommanderViewModel, ERROR CLASS: Cannot infer argument for type parameter T>, ERROR CLASS: Cannot infer argument for type parameter T)' method. None of the following functions is applicable:
+fun <T> MutableState<T>.setValue(thisObj: Any?, property: KProperty<*>, value: T): Unit
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:144:35 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:144:35 Not enough information to infer type argument for 'T'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:144:35 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:144:35 Not enough information to infer type argument for 'T'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:144:62 Unresolved reference 'CLOUD_ENABLED'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:145:29 Property delegate must have a 'getValue(CommanderViewModel, KMutableProperty1<CommanderViewModel, ERROR CLASS: Cannot infer argument for type parameter T>)' method. None of the following functions is applicable:
+fun <T> State<T>.getValue(thisObj: Any?, property: KProperty<*>): T
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:145:29 Property delegate must have a 'setValue(CommanderViewModel, KMutableProperty1<CommanderViewModel, ERROR CLASS: Cannot infer argument for type parameter T>, ERROR CLASS: Cannot infer argument for type parameter T)' method. None of the following functions is applicable:
+fun <T> MutableState<T>.setValue(thisObj: Any?, property: KProperty<*>, value: T): Unit
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:145:32 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:145:32 Not enough information to infer type argument for 'T'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:145:32 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:145:32 Not enough information to infer type argument for 'T'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:145:59 Unresolved reference 'CLOUD_ENDPOINT'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:146:30 Property delegate must have a 'getValue(CommanderViewModel, KMutableProperty1<CommanderViewModel, ERROR CLASS: Cannot infer argument for type parameter T>)' method. None of the following functions is applicable:
+fun <T> State<T>.getValue(thisObj: Any?, property: KProperty<*>): T
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:146:30 Property delegate must have a 'setValue(CommanderViewModel, KMutableProperty1<CommanderViewModel, ERROR CLASS: Cannot infer argument for type parameter T>, ERROR CLASS: Cannot infer argument for type parameter T)' method. None of the following functions is applicable:
+fun <T> MutableState<T>.setValue(thisObj: Any?, property: KProperty<*>, value: T): Unit
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:146:33 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:146:33 Not enough information to infer type argument for 'T'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:146:33 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:146:33 Not enough information to infer type argument for 'T'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:146:60 Unresolved reference 'CLOUD_ROOT'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:147:23 Property delegate must have a 'getValue(CommanderViewModel, KMutableProperty1<CommanderViewModel, ERROR CLASS: Cannot infer argument for type parameter T>)' method. None of the following functions is applicable:
+fun <T> State<T>.getValue(thisObj: Any?, property: KProperty<*>): T
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:147:23 Property delegate must have a 'setValue(CommanderViewModel, KMutableProperty1<CommanderViewModel, ERROR CLASS: Cannot infer argument for type parameter T>, ERROR CLASS: Cannot infer argument for type parameter T)' method. None of the following functions is applicable:
+fun <T> MutableState<T>.setValue(thisObj: Any?, property: KProperty<*>, value: T): Unit
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:147:26 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:147:26 Not enough information to infer type argument for 'T'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:147:26 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:147:26 Not enough information to infer type argument for 'T'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:147:53 Unresolved reference 'CLOUD_USER'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:151:22 Property delegate must have a 'getValue(CommanderViewModel, KMutableProperty1<CommanderViewModel, ERROR CLASS: Cannot infer argument for type parameter T>)' method. None of the following functions is applicable:
+fun <T> State<T>.getValue(thisObj: Any?, property: KProperty<*>): T
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:151:22 Property delegate must have a 'setValue(CommanderViewModel, KMutableProperty1<CommanderViewModel, ERROR CLASS: Cannot infer argument for type parameter T>, ERROR CLASS: Cannot infer argument for type parameter T)' method. None of the following functions is applicable:
+fun <T> MutableState<T>.setValue(thisObj: Any?, property: KProperty<*>, value: T): Unit
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:151:25 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:151:25 Not enough information to infer type argument for 'T'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:151:25 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:151:25 Not enough information to infer type argument for 'T'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:151:52 Unresolved reference 'SYNC_BINARIES'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:152:23 Property delegate must have a 'getValue(CommanderViewModel, KMutableProperty1<CommanderViewModel, ERROR CLASS: Cannot infer argument for type parameter T>)' method. None of the following functions is applicable:
+fun <T> State<T>.getValue(thisObj: Any?, property: KProperty<*>): T
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:152:23 Property delegate must have a 'setValue(CommanderViewModel, KMutableProperty1<CommanderViewModel, ERROR CLASS: Cannot infer argument for type parameter T>, ERROR CLASS: Cannot infer argument for type parameter T)' method. None of the following functions is applicable:
+fun <T> MutableState<T>.setValue(thisObj: Any?, property: KProperty<*>, value: T): Unit
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:152:26 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:152:26 Not enough information to infer type argument for 'T'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:152:26 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:152:26 Not enough information to infer type argument for 'T'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:152:53 Unresolved reference 'SYNC_LIBRARIES'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:153:18 Property delegate must have a 'getValue(CommanderViewModel, KMutableProperty1<CommanderViewModel, ERROR CLASS: Cannot infer argument for type parameter T>)' method. None of the following functions is applicable:
+fun <T> State<T>.getValue(thisObj: Any?, property: KProperty<*>): T
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:153:18 Property delegate must have a 'setValue(CommanderViewModel, KMutableProperty1<CommanderViewModel, ERROR CLASS: Cannot infer argument for type parameter T>, ERROR CLASS: Cannot infer argument for type parameter T)' method. None of the following functions is applicable:
+fun <T> MutableState<T>.setValue(thisObj: Any?, property: KProperty<*>, value: T): Unit
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:153:21 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:153:21 Not enough information to infer type argument for 'T'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:153:21 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:153:21 Not enough information to infer type argument for 'T'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:153:48 Unresolved reference 'SYNC_LOGS'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:154:19 Property delegate must have a 'getValue(CommanderViewModel, KMutableProperty1<CommanderViewModel, ERROR CLASS: Cannot infer argument for type parameter T>)' method. None of the following functions is applicable:
+fun <T> State<T>.getValue(thisObj: Any?, property: KProperty<*>): T
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:154:19 Property delegate must have a 'setValue(CommanderViewModel, KMutableProperty1<CommanderViewModel, ERROR CLASS: Cannot infer argument for type parameter T>, ERROR CLASS: Cannot infer argument for type parameter T)' method. None of the following functions is applicable:
+fun <T> MutableState<T>.setValue(thisObj: Any?, property: KProperty<*>, value: T): Unit
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:154:22 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:154:22 Not enough information to infer type argument for 'T'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:154:22 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:154:22 Not enough information to infer type argument for 'T'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:154:49 Unresolved reference 'SYNC_CACHE'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:157:17 Conflicting declarations:
+var cloudAppPassword: <ERROR TYPE REF: Unresolved name: CLOUD_TOKEN>
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:158:17 Conflicting declarations:
+var cloudAppPassword: String
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:158:48 Unresolved reference 'CLOUD_TOKEN'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:337:9 Overload resolution ambiguity between candidates:
+var isPersonalCloudEnabled: Boolean
+var isPersonalCloudEnabled: <ERROR TYPE REF: Cannot infer argument for type parameter T>
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:338:26 Overload resolution ambiguity between candidates:
+var isPersonalCloudEnabled: Boolean
+var isPersonalCloudEnabled: <ERROR TYPE REF: Cannot infer argument for type parameter T>
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:420:26 Unresolved reference 'WebUIHost'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:427:23 Unresolved reference 'WebUIHost'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:429:22 Unresolved reference 'start'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:457:21 Overload resolution ambiguity between candidates:
+var isPersonalCloudEnabled: Boolean
+var isPersonalCloudEnabled: <ERROR TYPE REF: Cannot infer argument for type parameter T>
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:466:13 Unresolved reference 'not' for operator '!'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:466:14 Overload resolution ambiguity between candidates:
+var isPersonalCloudEnabled: Boolean
+var isPersonalCloudEnabled: <ERROR TYPE REF: Cannot infer argument for type parameter T>
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:473:57 Overload resolution ambiguity between candidates:
+var cloudAppPassword: String
+var cloudAppPassword: <ERROR TYPE REF: Unresolved name: CLOUD_TOKEN>
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/CommanderViewModel.kt:628:18 Unresolved reference 'stop'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/LoginScreen.kt:23:20 Unresolved reference 'BuildConfig'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/LoginScreen.kt:37:25 Unresolved reference 'BuildConfig'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/WebUIHost.kt:175:54 Overload resolution ambiguity between candidates:
+var isPersonalCloudEnabled: Boolean
+var isPersonalCloudEnabled: <ERROR TYPE REF: Cannot infer argument for type parameter T>
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/WebUIHost.kt:265:27 Unresolved reference 'testCloudConnectivity'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/panels/MediaPlayerPanel.kt:105:45 Unresolved reference 'scale'.
+e: file:///C:/Users/Night/dj_MIDI_Watts/app/src/main/java/com/example/ui/panels/VideoPlayerPanel.kt:71:41 Unresolved reference 'animateColor'.
+
+> Task :app:compileDebugKotlin FAILED
+[Incubating] Problems report is available at: file:///C:/Users/Night/dj_MIDI_Watts/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:compileDebugKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.11.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 7m 1s
+18 actionable tasks: 18 executed

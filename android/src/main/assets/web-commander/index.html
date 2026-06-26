@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ MIDI WATTS BOARD</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet" crossorigin="anonymous">
+</head>
+<body class="dj-board-theme">
+    <div class="stars-overlay"></div>
+    <header class="main-header">
+        <div class="logo-area">
+            <span class="pulse-indicator"></span>
+            <h1 class="logo-text">DJ MIDI WATTS BOARD</h1>
+        </div>
+        <div class="header-status">
+            <span class="status-indicator" id="connection-status">DISCONNECTED</span>
+        </div>
+    </header>
+
+    <main class="grid-container">
+        <!-- Section 1: Equalizer Faders Grid -->
+        <section class="board-card faders-section">
+            <h2 class="card-title">SIGNAL EQUALIZER</h2>
+            <div class="faders-grid">
+                <div class="fader-col">
+                    <span class="fader-label">SUB</span>
+                    <div class="slider-container">
+                        <input type="range" id="faderSub" min="0" max="1" step="0.01" value="0.3" title="Sub Bass Fader" placeholder="0.3">
+                    </div>
+                    <span class="fader-val" id="val-faderSub">30%</span>
+                </div>
+                <div class="fader-col">
+                    <span class="fader-label">LOW</span>
+                    <div class="slider-container">
+                        <input type="range" id="faderLow" min="0" max="1" step="0.01" value="0.4" title="Low EQ Fader" placeholder="0.4">
+                    </div>
+                    <span class="fader-val" id="val-faderLow">40%</span>
+                </div>
+                <div class="fader-col">
+                    <span class="fader-label">MID</span>
+                    <div class="slider-container">
+                        <input type="range" id="faderMid" min="0" max="1" step="0.01" value="0.5" title="Mid EQ Fader" placeholder="0.5">
+                    </div>
+                    <span class="fader-val" id="val-faderMid">50%</span>
+                </div>
+                <div class="fader-col">
+                    <span class="fader-label">VOCAL</span>
+                    <div class="slider-container">
+                        <input type="range" id="faderVocal" min="0" max="1" step="0.01" value="0.5" title="Vocal EQ Fader" placeholder="0.5">
+                    </div>
+                    <span class="fader-val" id="val-faderVocal">50%</span>
+                </div>
+                <div class="fader-col">
+                    <span class="fader-label">HIGH</span>
+                    <div class="slider-container">
+                        <input type="range" id="faderHigh" min="0" max="1" step="0.01" value="0.6" title="High EQ Fader" placeholder="0.6">
+                    </div>
+                    <span class="fader-val" id="val-faderHigh">60%</span>
+                </div>
+                <div class="fader-col">
+                    <span class="fader-label">FOG</span>
+                    <div class="slider-container">
+                        <input type="range" id="faderFog" min="0" max="1" step="0.01" value="0.2" title="Fog Output Fader" placeholder="0.2">
+                    </div>
+                    <span class="fader-val" id="val-faderFog">20%</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Active Stage Trigger Grid -->
+        <section class="board-card fx-section">
+            <h2 class="card-title">ACTIVE STAGE TRIGGER GRID</h2>
+            <div class="fx-grid">
+                <button class="fx-btn" id="btn-strobe">STROBE</button>
+                <button class="fx-btn" id="btn-fog">FOG GER</button>
+                <button class="fx-btn" id="btn-laser">LASER</button>
+                <button class="fx-btn" id="btn-spotify">SPOTIFY</button>
+            </div>
+        </section>
+
+        <!-- Section 3: Kinetic Video Projection -->
+        <section class="board-card visualizer-section">
+            <div class="visualizer-header">
+                <h2 class="card-title">DECK B - VISUAL PROJECTION PLAYBACK</h2>
+                <div class="vis-controls">
+                    <button class="vis-mode-btn active" data-mode="0">HELIX TUNNEL</button>
+                    <button class="vis-mode-btn" data-mode="1">PLASMA RETRO</button>
+                    <button class="vis-mode-btn" data-mode="2">QUANTUM GRID</button>
+                </div>
+            </div>
+            <div class="canvas-wrapper">
+                <canvas id="visualizer-canvas"></canvas>
+                <div class="canvas-overlay-hud">
+                    <span class="hud-item" id="hud-scene">SCENE: HELIX TUNNEL</span>
+                    <span class="hud-item" id="hud-fps">HD RENDER 60FPS</span>
+                    <span class="hud-item" id="hud-ping">GRID PULSE: --MS</span>
+                </div>
+                <div class="strobe-flash" id="strobe-overlay"></div>
+            </div>
+        </section>
+
+        <!-- Section 4: Media Deck Deployed -->
+        <section class="board-card media-section">
+            <h2 class="card-title">DECK A - PROFESSIONAL MEDIA LAYER CONSOLE</h2>
+            <div class="media-deck-layout">
+                <!-- Master Deck Control Panel -->
+                <div class="master-deck-panel">
+                    <div class="deck-disc-area">
+                        <div class="spinning-disc" id="vinyl-disc">
+                            <div class="disc-label">DJ WATTS</div>
+                        </div>
+                    </div>
+                    <div class="track-details-area">
+                        <div class="track-title" id="playing-track">NO ACTIVE TRACK</div>
+                        <div class="track-artist" id="playing-artist">STUDIO ARTIST : DJ MIDI WATTS</div>
+                        <div class="track-bpm" id="track-bpm-display">TEMPO CONFIG : 128 BPM / STEREO 48KHZ</div>
+                        <div class="progress-container">
+                            <span id="elapsed-time">00:00</span>
+                            <input type="range" class="progress-bar" id="media-progress" min="0" max="100" value="0" title="Media Progress" placeholder="0">
+                            <span id="duration-time">--:--</span>
+                        </div>
+                    </div>
+                    <div class="transport-controls">
+                        <button class="transport-btn" id="btn-prev" title="Previous Track">◀◀</button>
+                        <button class="transport-btn play-pause-btn" id="btn-playpause">PLAY</button>
+                        <button class="transport-btn" id="btn-next" title="Next Track">▶▶</button>
+                    </div>
+                </div>
+
+                <!-- Media Source Loader & Selector -->
+                <div class="source-loader-panel">
+                    <h3 class="subsection-title">LOAD MEDIA SOURCE</h3>
+                    <div class="source-tabs">
+                        <!-- Local drag and drop/file upload -->
+                        <div class="file-upload-zone" id="drop-zone">
+                            <span class="upload-icon">📁</span>
+                            <span class="upload-text">DRAG & DROP AUDIO HERE OR CLICK</span>
+                            <input type="file" id="media-file-input" accept=".mp3,.wav,.ogg,.m4a,.aac" multiple style="display: none;">
+                            <span class="file-formats">Accepts: .mp3, .wav, .ogg, .m4a, .aac</span>
+                        </div>
+
+                        <!-- Spotify Loader -->
+                        <div class="spotify-loader-row">
+                            <input type="text" id="spotify-track-input" placeholder="Paste Spotify Track URL / ID (e.g. 4PTG3ZdBGkC6n...)" title="Spotify Track Link">
+                            <button class="board-action-btn" id="btn-spotify-load">LOAD SPOTIFY</button>
+                            <button class="board-action-btn" id="btn-spotify-download" title="Download Spotify Track">📥 DOWNLOAD</button>
+                        </div>
+
+                        <!-- Personal Cloud list -->
+                        <div class="cloud-tracks-container">
+                            <span class="action-desc">Cloud Storage (cloud_env.env):</span>
+                            <div class="cloud-track-list" id="cloud-track-list">
+                                <button class="cloud-track-btn" data-url="cloud-beat-128.mp3" data-name="Cloud_Beat_128.mp3">☁️ Cloud_Beat_128.mp3</button>
+                                <button class="cloud-track-btn" data-url="ambient-swell.wav" data-name="Ambient_Swell_Ambient.wav">☁️ Ambient_Swell_Ambient.wav</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Multi-Layer Looping Deck -->
+                <div class="multi-layer-deck-panel">
+                    <h3 class="subsection-title">MULTI-CHANNEL LAYER CONTROLLER</h3>
+                    <div class="layers-container">
+                        <!-- Layer 1 -->
+                        <div class="layer-row" data-layer="0">
+                            <div class="layer-header">
+                                <span class="layer-badge">CH 1</span>
+                                <select class="layer-track-select" id="layer-0-select" title="Layer 1 Track Selector">
+                                    <option value="">-- No Source Loaded --</option>
+                                    <option value="synthbeat">Built-in Synth Beat (128 BPM)</option>
+                                </select>
+                                <button class="layer-mute-btn" id="layer-0-mute" title="Mute Layer 1">MUTE</button>
+                            </div>
+                            <div class="layer-controls">
+                                <div class="loop-range-container">
+                                    <span class="loop-label">LOOP WINDOW:</span>
+                                    <input type="range" class="loop-start-slider" id="layer-0-start" min="0" max="100" value="0" title="Layer 1 Loop Start" placeholder="0">
+                                    <input type="range" class="loop-end-slider" id="layer-0-end" min="0" max="100" value="100" title="Layer 1 Loop End" placeholder="100">
+                                    <span class="loop-vals" id="layer-0-vals">0.0s - End</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Layer 2 -->
+                        <div class="layer-row" data-layer="1">
+                            <div class="layer-header">
+                                <span class="layer-badge">CH 2</span>
+                                <select class="layer-track-select" id="layer-1-select" title="Layer 2 Track Selector">
+                                    <option value="">-- No Source Loaded --</option>
+                                    <option value="synthbeat">Built-in Synth Beat (128 BPM)</option>
+                                </select>
+                                <button class="layer-mute-btn" id="layer-1-mute" title="Mute Layer 2">MUTE</button>
+                            </div>
+                            <div class="layer-controls">
+                                <div class="loop-range-container">
+                                    <span class="loop-label">LOOP WINDOW:</span>
+                                    <input type="range" class="loop-start-slider" id="layer-1-start" min="0" max="100" value="0" title="Layer 2 Loop Start" placeholder="0">
+                                    <input type="range" class="loop-end-slider" id="layer-1-end" min="0" max="100" value="100" title="Layer 2 Loop End" placeholder="100">
+                                    <span class="loop-vals" id="layer-1-vals">0.0s - End</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Layer 3 -->
+                        <div class="layer-row" data-layer="2">
+                            <div class="layer-header">
+                                <span class="layer-badge">CH 3</span>
+                                <select class="layer-track-select" id="layer-2-select" title="Layer 3 Track Selector">
+                                    <option value="">-- No Source Loaded --</option>
+                                    <option value="synthbeat">Built-in Synth Beat (128 BPM)</option>
+                                </select>
+                                <button class="layer-mute-btn" id="layer-2-mute" title="Mute Layer 3">MUTE</button>
+                            </div>
+                            <div class="layer-controls">
+                                <div class="loop-range-container">
+                                    <span class="loop-label">LOOP WINDOW:</span>
+                                    <input type="range" class="loop-start-slider" id="layer-2-start" min="0" max="100" value="0" title="Layer 3 Loop Start" placeholder="0">
+                                    <input type="range" class="loop-end-slider" id="layer-2-end" min="0" max="100" value="100" title="Layer 3 Loop End" placeholder="100">
+                                    <span class="loop-vals" id="layer-2-vals">0.0s - End</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Credentials & Infrastructure Diagnostics -->
+        <section class="board-card diagnostics-section">
+            <h2 class="card-title">INFRASTRUCTURE INTEGRITY LOG</h2>
+            <div class="diagnostics-grid">
+                <div class="diag-card">
+                    <span class="diag-label">GCP PROJECT:</span>
+                    <span class="diag-value" id="diag-gcp-project">--</span>
+                </div>
+                <div class="diag-card">
+                    <span class="diag-label">BILLING ACCOUNT:</span>
+                    <span class="diag-value" id="diag-billing">--</span>
+                </div>
+                <div class="diag-card">
+                    <span class="diag-label">S1 ORCHESTRATION:</span>
+                    <span class="diag-value" id="diag-s1">--</span>
+                </div>
+                <div class="diag-card">
+                    <span class="diag-label">S2 OAUTH CLIENT:</span>
+                    <span class="diag-value" id="diag-s2">--</span>
+                </div>
+                <div class="diag-card">
+                    <span class="diag-label">PLAY API KEY:</span>
+                    <span class="diag-value" id="diag-play-api">--</span>
+                </div>
+                <div class="diag-card">
+                    <span class="diag-label">CREDENTIALS JSON:</span>
+                    <span class="diag-value" id="diag-creds-status">--</span>
+                </div>
+            </div>
+            <div class="terminal-log" id="log-terminal">
+                <div class="log-line success">[SYSTEM] Board shell initialized. Ready for local host uplink.</div>
+            </div>
+        </section>
+
+        <!-- Section 6: Preboot Device Discovery & Driver Status -->
+        <section class="board-card preboot-section">
+            <h2 class="card-title">PREBOOT DEVICE & DRIVER DIRECTORY</h2>
+            <div class="preboot-status-grid">
+                <div class="diag-card">
+                    <span class="diag-label">BLUETOOTH CHIP:</span>
+                    <span class="diag-value" id="preboot-bt-status">PROBING...</span>
+                </div>
+                <div class="diag-card">
+                    <span class="diag-label">LOOPMIDI VIRTUAL:</span>
+                    <span class="diag-value" id="preboot-virtual-status">PROBING...</span>
+                </div>
+                <div class="diag-card">
+                    <span class="diag-label">ACTIVE ROUTING:</span>
+                    <span class="diag-value" id="preboot-routing-status">PROBING...</span>
+                </div>
+            </div>
+            
+            <div class="device-list-container">
+                <h3 class="subsection-title">DISCOVERED SYSTEM DEVICES</h3>
+                <div id="preboot-device-list" class="device-list">
+                    <div class="device-item empty">Run drivers/preboot_device_discovery.ps1 to register devices</div>
+                </div>
+            </div>
+
+            <div class="driver-action-area">
+                <span class="action-desc">Run driver sync to load loopMIDI and serial DMX utilities:</span>
+                <code class="cmd-box" title="Click to select all">powershell -ExecutionPolicy Bypass -File drivers/preboot_device_discovery.ps1</code>
+            </div>
+        </section>
+
+        <!-- Section 7: Global Options & Themed Board Installer -->
+        <section class="board-card settings-section">
+            <h2 class="card-title">GLOBAL SETTINGS & MODULE MANAGER</h2>
+            <div class="settings-content">
+                <!-- User Account & Licensing Panel -->
+                <div class="settings-panel">
+                    <div class="panel-header-row">
+                        <span class="panel-section-title">ACCOUNT CONFIGURATION</span>
+                        <span class="status-badge" id="account-tier-badge">FREE ACCOUNT</span>
+                    </div>
+                    <div class="panel-body-text">
+                        Spotify track downloads are locked for Free accounts. Adjust your subscription status below to unlock permissions.
+                    </div>
+                    <div class="action-buttons-row">
+                        <button class="board-action-btn active" id="btn-tier-free">FREE TIER</button>
+                        <button class="board-action-btn" id="btn-tier-premium">PREMIUM TIER</button>
+                    </div>
+                </div>
+
+                <!-- Theme Board Manager (Star Wars / Mauser installer) -->
+                <div class="settings-panel">
+                    <div class="panel-header-row">
+                        <span class="panel-section-title">THEMED MIDI BOARDS</span>
+                        <span class="status-badge" id="active-theme-badge">DEFAULT THEME</span>
+                    </div>
+                    <div class="theme-installers-list">
+                        <!-- Default Theme -->
+                        <div class="theme-installer-row">
+                            <div class="theme-meta">
+                                <span class="theme-name">Default Neon Board</span>
+                                <span class="theme-status success">INSTALLED</span>
+                            </div>
+                            <button class="theme-action-btn active" id="btn-apply-default">APPLY</button>
+                        </div>
+                        
+                        <!-- Star Wars Theme -->
+                        <div class="theme-installer-row">
+                            <div class="theme-meta">
+                                <span class="theme-name">Star Wars Galactic Board</span>
+                                <span class="theme-status" id="status-starwars">NOT INSTALLED</span>
+                            </div>
+                            <div class="theme-download-bar-container hidden" id="dl-bar-starwars-container">
+                                <div class="theme-download-bar" id="dl-bar-starwars" style="width: 0%;"></div>
+                            </div>
+                            <button class="theme-action-btn" id="btn-action-starwars">DOWNLOAD (5.2 MB)</button>
+                        </div>
+
+                        <!-- Mauser Theme -->
+                        <div class="theme-installer-row">
+                            <div class="theme-meta">
+                                <span class="theme-name">Mauser Industrial Board</span>
+                                <span class="theme-status" id="status-mauser">NOT INSTALLED</span>
+                            </div>
+                            <div class="theme-download-bar-container hidden" id="dl-bar-mauser-container">
+                                <div class="theme-download-bar" id="dl-bar-mauser" style="width: 0%;"></div>
+                            </div>
+                            <button class="theme-action-btn" id="btn-action-mauser">DOWNLOAD (3.8 MB)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hidden context overlay block for Star Wars Telemetry -->
+            <div id="starwars-telemetry-block" class="hidden">
+                <div class="vibe-display">
+                    <div>
+                        <span class="vibe-label">GRID VIBE FEEDBACK:</span>
+                        <div class="vibe-value" id="vibe-feedback">PROBING ENERGY...</div>
+                    </div>
+                    <div class="telemetry-grid">
+                        <div class="tele-item">
+                            <span class="tele-label">HEAP SATURATION:</span>
+                            <span class="tele-value" id="tele-memory">15%</span>
+                        </div>
+                        <div class="tele-item">
+                            <span class="tele-label">LATENCY MS:</span>
+                            <span class="tele-value" id="tele-latency">4ms</span>
+                        </div>
+                        <div class="tele-item">
+                            <span class="tele-label">VAULT BALANCE:</span>
+                            <span class="tele-value" id="tele-vault">1250 CR</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

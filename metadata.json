@@ -1,0 +1,6 @@
+{
+  "name": "DJ MIDI WATTS",
+  "description": "Professional MIDI control deck, multi-band audio faders, live visualizer, and DMX lighting effects simulator.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

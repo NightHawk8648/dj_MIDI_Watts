@@ -1,0 +1,527 @@
+u<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ULTIMA-GRID // WEB COMMANDER</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: #0b0f19;
+        }
+        .glow {
+            box-shadow: 0 0 15px var(--glow-color);
+        }
+        .slide-thumb::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--glow-color);
+            cursor: pointer;
+            border: 2px solid #ffffff;
+            box-shadow: 0 0 10px var(--glow-color);
+        }
+        .slide-thumb::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--glow-color);
+            cursor: pointer;
+            border: 2px solid #ffffff;
+            box-shadow: 0 0 10px var(--glow-color);
+        }
+    </style>
+</head>
+<body class="text-slate-100 min-h-screen pb-12 transition-colors duration-300" style="--glow-color: #00FFCC;">
+    <div class="max-w-6xl mx-auto px-4 pt-6">
+        <!-- Top Ribbon Header -->
+        <header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-slate-900/60 border border-slate-800 p-6 rounded-2xl mb-6 backdrop-blur-md">
+            <div>
+                <div class="flex items-center gap-3">
+                    <h1 class="text-xl md:text-2xl font-extrabold tracking-widest text-[#00FFCC] transition-all duration-300" id="header-title">ULTIMA-GRID // WEB COMMANDER</h1>
+                    <span class="bg-[#00FFCC]/10 text-[#00FFCC] border border-[#00FFCC]/30 px-2.5 py-0.5 rounded-full text-[10px] font-bold" id="version-pill">PORTAL V1.0.0</span>
+                </div>
+                <p class="text-xs text-slate-400 mt-1">EMBEDDED HARDWARE STAGE CONTROLLER AND MIDI SIMULATOR</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2 bg-slate-950 px-4 py-2 border border-slate-800 rounded-xl">
+                    <div class="w-2.5 h-2.5 rounded-full bg-[#00FFCC] animate-pulse" id="status-led"></div>
+                    <span class="text-xs font-bold text-slate-200" id="status-text">HOST READY</span>
+                </div>
+                <div class="text-right">
+                    <span class="block text-2xl font-black text-[#00FFCC] leading-none" id="tempo-bpm">128</span>
+                    <span class="text-[9px] text-[#64748B] tracking-wider font-bold">BPM CLOCK</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Left Controls Segment (faders & presets) -->
+            <div class="lg:col-span-8 flex flex-col gap-6">
+                
+                <!-- Snapshot Preset Manager -->
+                <section class="bg-slate-900 border border-slate-800/80 p-6 rounded-2xl">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xs font-extrabold text-slate-400 tracking-widest">GLOBAL SNAPSHOT MANAGER</h2>
+                        <div class="flex gap-2">
+                            <input type="text" id="preset-name" placeholder="Preset label..." class="bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-[#00FFCC] transition-colors w-40">
+                            <button onclick="saveSnapshot()" class="bg-[#00FFCC]/15 text-[#00FFCC] border border-[#00FFCC]/40 hover:bg-[#00FFCC]/30 text-xs font-bold px-4 py-1.5 rounded-lg transition-all flex items-center gap-1.5 cursor-pointer">
+                                <span>SAVE SNAPSHOT</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="presets-list" class="flex flex-wrap gap-2 min-h-[40px] items-center text-xs text-slate-500">
+                        Loading presets database...
+                    </div>
+                </section>
+
+                <!-- Audio stem faders (Vertical Visual Sliders) -->
+                <section class="bg-slate-900 border border-slate-800/80 p-6 rounded-2xl">
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <h2 class="text-xs font-extrabold text-slate-400 tracking-widest">BASS STRIP & EQUALIZER</h2>
+                            <p class="text-[10px] text-slate-500 mt-0.5">MULTI-BAND FREQUENCY STEM LEVELS</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <!-- Led Selectors in Web -->
+                            <span class="text-[10px] text-slate-400 font-bold">LED COLOR</span>
+                            <div class="flex gap-1.5">
+                                <button onclick="changeColor('#00FFCC')" class="w-4 h-4 rounded-full bg-[#00FFCC] border-2 border-slate-900 hover:scale-110 transition-transform cursor-pointer" title="Neon Green"></button>
+                                <button onclick="changeColor('#00E5FF')" class="w-4 h-4 rounded-full bg-[#00E5FF] border-2 border-slate-900 hover:scale-110 transition-transform cursor-pointer" title="Volt Cyan"></button>
+                                <button onclick="changeColor('#FF007F')" class="w-4 h-4 rounded-full bg-[#FF007F] border-2 border-slate-900 hover:scale-110 transition-transform cursor-pointer" title="Cyber Pink"></button>
+                                <button onclick="changeColor('#9D4EDD')" class="w-4 h-4 rounded-full bg-[#9D4EDD] border-2 border-slate-900 hover:scale-110 transition-transform cursor-pointer" title="Laser Purple"></button>
+                                <button onclick="changeColor('#FFD166')" class="w-4 h-4 rounded-full bg-[#FFD166] border-2 border-slate-900 hover:scale-110 transition-transform cursor-pointer" title="Warm Flare"></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-5 gap-4 h-64 items-stretch">
+                        <!-- SUB -->
+                        <div class="flex flex-col items-center gap-3 bg-slate-950/40 border border-slate-800/60 p-4 rounded-xl">
+                            <span class="text-[9px] font-bold text-slate-400">SUB</span>
+                            <div class="flex-1 relative flex justify-center">
+                                <input type="range" id="faderSub" min="0" max="1" step="0.01" class="slide-thumb h-full w-2 bg-slate-800 rounded-lg appearance-none cursor-pointer orientation-vertical" style="writing-mode: bt-lr; -webkit-appearance: slider-vertical;" oninput="updateFader('faderSub', this.value)">
+                            </div>
+                            <span id="faderSub-lbl" class="text-[10px] text-[#00FFCC] font-bold">30%</span>
+                        </div>
+                        <!-- LOW -->
+                        <div class="flex flex-col items-center gap-3 bg-slate-950/40 border border-slate-800/60 p-4 rounded-xl">
+                            <span class="text-[9px] font-bold text-slate-400">LOW</span>
+                            <div class="flex-1 relative flex justify-center">
+                                <input type="range" id="faderLow" min="0" max="1" step="0.01" class="slide-thumb h-full w-2 bg-slate-800 rounded-lg appearance-none cursor-pointer orientation-vertical" style="writing-mode: bt-lr; -webkit-appearance: slider-vertical;" oninput="updateFader('faderLow', this.value)">
+                            </div>
+                            <span id="faderLow-lbl" class="text-[10px] text-[#00FFCC] font-bold">40%</span>
+                        </div>
+                        <!-- MID -->
+                        <div class="flex flex-col items-center gap-3 bg-slate-950/40 border border-slate-800/60 p-4 rounded-xl">
+                            <span class="text-[9px] font-bold text-slate-400">MID</span>
+                            <div class="flex-1 relative flex justify-center">
+                                <input type="range" id="faderMid" min="0" max="1" step="0.01" class="slide-thumb h-full w-2 bg-slate-800 rounded-lg appearance-none cursor-pointer orientation-vertical" style="writing-mode: bt-lr; -webkit-appearance: slider-vertical;" oninput="updateFader('faderMid', this.value)">
+                            </div>
+                            <span id="faderMid-lbl" class="text-[10px] text-[#00FFCC] font-bold">50%</span>
+                        </div>
+                        <!-- VOCAL -->
+                        <div class="flex flex-col items-center gap-3 bg-slate-950/40 border border-slate-800/60 p-4 rounded-xl">
+                            <span class="text-[9px] font-bold text-slate-400">VOCAL</span>
+                            <div class="flex-1 relative flex justify-center">
+                                <input type="range" id="faderVocal" min="0" max="1" step="0.01" class="slide-thumb h-full w-2 bg-slate-800 rounded-lg appearance-none cursor-pointer orientation-vertical" style="writing-mode: bt-lr; -webkit-appearance: slider-vertical;" oninput="updateFader('faderVocal', this.value)">
+                            </div>
+                            <span id="faderVocal-lbl" class="text-[10px] text-[#00FFCC] font-bold">50%</span>
+                        </div>
+                        <!-- TREBLE -->
+                        <div class="flex flex-col items-center gap-3 bg-slate-950/40 border border-slate-800/60 p-4 rounded-xl">
+                            <span class="text-[9px] font-bold text-slate-400">TREBLE</span>
+                            <div class="flex-1 relative flex justify-center">
+                                <input type="range" id="faderHigh" min="0" max="1" step="0.01" class="slide-thumb h-full w-2 bg-slate-800 rounded-lg appearance-none cursor-pointer orientation-vertical" style="writing-mode: bt-lr; -webkit-appearance: slider-vertical;" oninput="updateFader('faderHigh', this.value)">
+                            </div>
+                            <span id="faderHigh-lbl" class="text-[10px] text-[#00FFCC] font-bold">60%</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Virtual MIDI CC, Note Knobs and Pads -->
+                <section class="bg-slate-900 border border-slate-800/80 p-6 rounded-2xl">
+                    <h2 class="text-xs font-extrabold text-slate-400 tracking-widest mb-4">SIMULATED MIDI TRIGGERS (CC & KEY NOTES)</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <span class="block text-[10px] text-slate-500 font-bold mb-3">HARDWARE KNOBS SYNC PRESET</span>
+                            <div class="space-y-4">
+                                <div>
+                                    <div class="flex justify-between text-[10px] text-slate-400 mb-1">
+                                        <span>CC-20 (LOW BASS)</span>
+                                        <span id="cc-20-lbl">40%</span>
+                                    </div>
+                                    <input type="range" min="0" max="1" step="0.01" id="midi-knob-low" class="slide-thumb w-full h-1 bg-slate-800 appearance-none cursor-pointer rounded" oninput="triggerMidiControl('midi_cc_low', this.value)">
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-[10px] text-slate-400 mb-1">
+                                        <span>CC-21 (STROBE RATE)</span>
+                                        <span id="cc-21-lbl">100 BPM</span>
+                                    </div>
+                                    <input type="range" min="0" max="1" step="0.01" id="midi-knob-strobe" class="slide-thumb w-full h-1 bg-slate-800 appearance-none cursor-pointer rounded" oninput="triggerMidiControl('midi_cc_strobe', this.value)">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] text-slate-500 font-bold mb-2">SIMULATED INSTRUMENTS NOTES</span>
+                            <div class="grid grid-cols-3 gap-2 mt-2">
+                                <button onclick="triggerFX('midi_note_60')" class="bg-slate-950 border border-slate-800 hover:border-[#00FFCC] text-slate-300 font-bold py-4 rounded-xl text-xs flex flex-col items-center justify-center gap-1 hover:bg-slate-900/40 group cursor-pointer">
+                                    <span class="text-[9px] text-[#00FFCC] group-hover:scale-110 transition-transform">60</span>
+                                    <span>LASER PAD</span>
+                                </button>
+                                <button onclick="triggerFX('midi_note_61')" class="bg-slate-950 border border-slate-800 hover:border-[#00FFCC] text-slate-300 font-bold py-4 rounded-xl text-xs flex flex-col items-center justify-center gap-1 hover:bg-slate-900/40 group cursor-pointer">
+                                    <span class="text-[9px] text-[#00FFCC] group-hover:scale-110 transition-transform">61</span>
+                                    <span>STROBE PAD</span>
+                                </button>
+                                <button onclick="triggerFX('midi_note_62')" class="bg-slate-950 border border-slate-800 hover:border-[#00FFCC] text-slate-300 font-bold py-4 rounded-xl text-xs flex flex-col items-center justify-center gap-1 hover:bg-slate-900/40 group cursor-pointer">
+                                    <span class="text-[9px] text-[#00FFCC] group-hover:scale-110 transition-transform">62</span>
+                                    <span>FOG PAD</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Sidebar Segment (active canvas, fx grid, terminal) -->
+            <div class="lg:col-span-4 flex flex-col gap-6">
+                
+                <!-- Digital Laser Visualizer Canvas -->
+                <section class="bg-slate-900 border border-slate-800/80 p-5 rounded-2xl">
+                    <h1 class="text-xs font-extrabold text-slate-400 tracking-widest mb-3">STAGE PREVIEW CANVAS</h1>
+                    <div class="bg-slate-950 border border-slate-800 rounded-xl overflow-hidden relative" style="height: 180px;">
+                        <canvas id="stageCanvas" class="w-full h-full block"></canvas>
+                    </div>
+                </section>
+
+                <!-- STAGE FX GRID -->
+                <section class="bg-slate-900 border border-slate-800/80 p-5 rounded-2xl">
+                    <h2 class="text-xs font-extrabold text-slate-400 tracking-widest mb-3">STAGE FX TRIGGER GRID</h2>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="triggerFX('strobe')" id="strobe-btn" class="bg-pink-500/10 text-pink-500 border border-pink-500/30 hover:bg-pink-500/20 py-3 rounded-xl font-bold text-xs flex flex-col items-center transition-colors cursor-pointer">
+                            <span>STROBE</span>
+                            <span id="strobe-status" class="text-[8px] opacity-70 mt-0.5">STROBE ON</span>
+                        </button>
+                        <button onclick="triggerFX('fog')" id="fog-btn" class="bg-amber-500/10 text-amber-500 border border-amber-500/30 hover:bg-amber-500/20 py-3 rounded-xl font-bold text-xs flex flex-col items-center transition-colors cursor-pointer">
+                            <span>FOGGER</span>
+                            <span id="fog-status" class="text-[8px] opacity-70 mt-0.5">READY</span>
+                        </button>
+                        <button onclick="triggerFX('midi_note_60')" id="wash-btn" class="bg-blue-500/10 text-blue-500 border border-blue-500/30 hover:bg-blue-500/20 py-3 rounded-xl font-bold text-xs flex flex-col items-center transition-colors cursor-pointer">
+                            <span>WASH</span>
+                            <span class="text-[8px] opacity-70 mt-0.5">RGBW PULSE</span>
+                        </button>
+                        <button onclick="triggerFX('laser')" id="laser-btn" class="bg-purple-500/10 text-purple-500 border border-purple-500/30 hover:bg-purple-500/20 py-3 rounded-xl font-bold text-xs flex flex-col items-center transition-colors cursor-pointer">
+                            <span>LASER</span>
+                            <span id="laser-status" class="text-[8px] opacity-70 mt-0.5">SWEEP CAPABLE</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Real-time Hardware Logger Console -->
+                <section class="bg-slate-900 border border-slate-800/80 p-5 rounded-2xl flex-1 flex flex-col">
+                    <h2 class="text-xs font-extrabold text-slate-400 tracking-widest mb-3">DMX BRIDGER CONSOLE</h2>
+                    <div id="terminal" class="bg-slate-950 border border-slate-850 p-4 rounded-xl text-[10px] font-mono text-emerald-400 overflow-y-auto flex-1 h-[220px] scrollbar-thin scrollbar-thumb-slate-800 leading-relaxed">
+                        <div>[PORTAL] Established bridge pipeline...</div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let activeGlowColorState = "#00FFCC";
+        let state = {
+            bpm: 128,
+            themeGlowColor: "#00FFCC",
+            faderSub: 0.3,
+            faderLow: 0.4,
+            faderMid: 0.5,
+            faderVocal: 0.5,
+            faderHigh: 0.6,
+            isStrobeActive: false,
+            isFogActive: false,
+            isLaserActive: false,
+            fogDensity: 0.0,
+            strobeSpeedBpm: 120
+        };
+
+        const canvas = document.getElementById('stageCanvas');
+        const ctx = canvas.getContext('2d');
+        let tickerTime = 0;
+
+        // Fit canvas to display width
+        function resizeCanvas() {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Polling the State Engine
+        function fetchState() {
+            fetch('/api/state')
+                .then(res => res.json())
+                .then(data => {
+                    // Update stored state
+                    state = data;
+
+                    // Sync LED Theme Glow Color
+                    if (activeGlowColorState !== data.themeGlowColor) {
+                        activeGlowColorState = data.themeGlowColor;
+                        document.body.style.setProperty('--glow-color', activeGlowColorState);
+                        
+                        // Update Dynamic Accents UI
+                        const accText = document.getElementById('header-title');
+                        const verPill = document.getElementById('version-pill');
+                        const tempo = document.getElementById('tempo-bpm');
+                        const led = document.getElementById('status-led');
+                        
+                        accText.style.color = activeGlowColorState;
+                        verPill.style.color = activeGlowColorState;
+                        verPill.style.borderColor = activeGlowColorState + '40';
+                        tempo.style.color = activeGlowColorState;
+                        led.style.backgroundColor = activeGlowColorState;
+                        led.style.boxShadow = '0 0 10px ' + activeGlowColorState;
+                    }
+
+                    // Sync Sliders and Labels
+                    document.getElementById('faderSub').value = data.faderSub;
+                    document.getElementById('faderSub-lbl').innerText = Math.round(data.faderSub * 100) + '%';
+                    
+                    document.getElementById('faderLow').value = data.faderLow;
+                    document.getElementById('faderLow-lbl').innerText = Math.round(data.faderLow * 100) + '%';
+
+                    document.getElementById('faderMid').value = data.faderMid;
+                    document.getElementById('faderMid-lbl').innerText = Math.round(data.faderMid * 100) + '%';
+
+                    document.getElementById('faderVocal').value = data.faderVocal;
+                    document.getElementById('faderVocal-lbl').innerText = Math.round(data.faderVocal * 100) + '%';
+
+                    document.getElementById('faderHigh').value = data.faderHigh;
+                    document.getElementById('faderHigh-lbl').innerText = Math.round(data.faderHigh * 100) + '%';
+
+                    // Sync Knobs
+                    document.getElementById('midi-knob-low').value = data.faderLow;
+                    document.getElementById('cc-20-lbl').innerText = Math.round(data.faderLow * 100) + '%';
+
+                    document.getElementById('midi-knob-strobe').value = (data.strobeSpeedBpm - 40) / 200;
+                    document.getElementById('cc-21-lbl').innerText = data.strobeSpeedBpm + ' BPM';
+
+                    // Text Clock
+                    document.getElementById('tempo-bpm').innerText = data.bpm;
+
+                    // FX Grid Status Text
+                    const strobeBtn = document.getElementById('strobe-btn');
+                    if (data.isStrobeActive) {
+                        strobeBtn.classList.add('bg-pink-500/20');
+                        document.getElementById('strobe-status').innerText = "STROBING NOW";
+                        document.getElementById('strobe-status').style.color = "#FF007F";
+                    } else {
+                        strobeBtn.classList.remove('bg-pink-500/20');
+                        document.getElementById('strobe-status').innerText = "PROJECTIONS READY";
+                        document.getElementById('strobe-status').style.color = "";
+                    }
+
+                    const fogBtn = document.getElementById('fog-btn');
+                    if (data.isFogActive) {
+                        fogBtn.classList.add('bg-amber-500/20');
+                        document.getElementById('fog-status').innerText = "DISPERSING 85%";
+                        document.getElementById('fog-status').style.color = "#F59E0B";
+                    } else {
+                        fogBtn.classList.remove('bg-amber-500/20');
+                        document.getElementById('fog-status').innerText = "COMPLETED";
+                        document.getElementById('fog-status').style.color = "";
+                    }
+
+                    const laserBtn = document.getElementById('laser-btn');
+                    if (data.isLaserActive) {
+                        laserBtn.classList.add('bg-purple-500/20');
+                        document.getElementById('laser-status').innerText = "LASERS EMITTING";
+                        document.getElementById('laser-status').style.color = "#8B5CF6";
+                    } else {
+                        laserBtn.classList.remove('bg-purple-500/20');
+                        document.getElementById('laser-status').innerText = "READY";
+                        document.getElementById('laser-status').style.color = "";
+                    }
+
+                    // Term Terminal Console
+                    const terminal = document.getElementById('terminal');
+                    const currentLogsHTML = data.logs.map(log => {
+                        let clr = "text-emerald-400";
+                        if(log.includes("[ERROR]")) clr = "text-rose-500";
+                        else if(log.includes("[WARN]")) clr = "text-amber-400";
+                        else if(log.includes("[GEMINI]")) clr = "text-purple-400";
+                        else if(log.includes("[SNAPSHOT]")) clr = "text-[#00FFCC]";
+                        return '<div class="' + clr + '">' + escapeHtml(log) + '</div>';
+                    }).join('');
+                    
+                    const wasAtBottom = (terminal.scrollHeight - terminal.clientHeight - terminal.scrollTop) < 20;
+                    terminal.innerHTML = currentLogsHTML;
+                    if (wasAtBottom) {
+                        terminal.scrollTop = terminal.scrollHeight;
+                    }
+
+                    // Sync Snapshots Database
+                    const presetsList = document.getElementById('presets-list');
+                    if(data.presets.length === 0) {
+                        presetsList.innerHTML = '<span class="text-slate-500 italic py-1">No system snapshots saved. Create one above!</span>';
+                    } else {
+                        presetsList.innerHTML = data.presets.map(p => {
+                            const isActivePreset = (data.bpm === p.bpm && Math.abs(data.faderSub - p.faderSub) < 0.05);
+                            const bgClass = isActivePreset ? 'bg-[#00FFCC]/15 border-[#00FFCC]/50 text-white' : 'bg-slate-950 border-slate-800 hover:border-slate-700 text-slate-300';
+                            return '<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border ' + bgClass + ' text-xs antialiased font-bold">' +
+                                   '  <button onclick="applyPreset(' + p.id + ')" class="cursor-pointer tracking-wide">' + escapeHtml(p.name) + ' (' + p.bpm + ' BPM)</button>' +
+                                   '  <button onclick="deletePreset(' + p.id + ')" class="text-slate-500 hover:text-red-400 font-bold ml-1.5 cursor-pointer">&times;</button>' +
+                                   '</div>';
+                        }).join('');
+                    }
+                })
+                .catch(e => {
+                    document.getElementById('status-text').innerText = "DISCONNECTED";
+                    document.getElementById('status-led').style.backgroundColor = "#EF4444";
+                    document.getElementById('status-led').style.boxShadow = "0 0 10px #EF4444";
+                });
+        }
+
+        // REST Helpers
+        function updateFader(param, value) {
+            fetch('/api/control?param=' + param + '&value=' + value);
+            document.getElementById(param + '-lbl').innerText = Math.round(value * 100) + '%';
+        }
+
+        function changeColor(hex) {
+            fetch('/api/control?param=theme_color&value=' + encodeURIComponent(hex));
+        }
+
+        function triggerFX(fx) {
+            fetch('/api/trigger?fx=' + fx);
+        }
+
+        function triggerMidiControl(param, value) {
+            let innerParam = "faderLow";
+            if(param === 'midi_cc_low') innerParam = "faderLow";
+            else if(param === 'midi_cc_strobe') innerParam = "strobe_speed";
+            
+            let computedVal = value;
+            if(param === 'midi_cc_strobe') {
+                computedVal = Math.round(40 + (value * 200));
+            }
+            
+            fetch('/api/control?param=' + innerParam + '&value=' + computedVal);
+        }
+
+        function applyPreset(id) {
+            fetch('/api/preset/apply?id=' + id);
+        }
+
+        function deletePreset(id) {
+            if(confirm("Confirm delete this snapshot?")) {
+                fetch('/api/preset/delete?id=' + id);
+            }
+        }
+
+        function saveSnapshot() {
+            const nameInVal = document.getElementById('preset-name').value.trim();
+            const name = nameInVal || "Recall Grid";
+            document.getElementById('preset-name').value = "";
+            fetch('/api/preset/save?name=' + encodeURIComponent(name));
+        }
+
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Pure visual stage animation loop on canvas
+        function drawLoop() {
+            tickerTime += 16;
+            ctx.fillStyle = '#020617';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Simulated Strobe Flash Filter logic
+            let strobePulseOn = false;
+            if(state.isStrobeActive && state.strobeSpeedBpm > 0) {
+                const flashPeriod = 60000 / state.strobeSpeedBpm;
+                strobePulseOn = Math.floor(tickerTime / (flashPeriod / 2)) % 2 === 0;
+            }
+
+            if(strobePulseOn) {
+                ctx.fillStyle = activeGlowColorState + '1F';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+
+            // Render lasers starting from center top in physical beam fashion
+            if(state.isLaserActive) {
+                const laser1 = canvas.width / 2 + Math.sin(tickerTime * 0.005) * (canvas.width / 2);
+                const laser2 = canvas.width / 2 + Math.sin(tickerTime * 0.007 + 2) * (canvas.width / 2);
+                
+                ctx.lineWidth = 3;
+                
+                ctx.strokeStyle = '#c084fc';
+                ctx.beginPath();
+                ctx.moveTo(canvas.width / 2, 0);
+                ctx.lineTo(laser1, canvas.height);
+                ctx.stroke();
+
+                ctx.strokeStyle = '#22d3ee';
+                ctx.beginPath();
+                ctx.moveTo(canvas.width / 2, 0);
+                ctx.lineTo(laser2, canvas.height);
+                ctx.stroke();
+            }
+
+            // Render floating fog clouds
+            if(state.isFogActive || state.fogDensity > 0.05) {
+                const density = state.isFogActive ? 0.85 : state.fogDensity;
+                ctx.fillStyle = 'rgba(255, 255, 255, ' + (density * 0.15) + ')';
+                
+                const x1 = (100 + tickerTime * 0.2) % canvas.width;
+                const x2 = canvas.width - (tickerTime * 0.16) % canvas.width;
+                const yOff = canvas.height - 50;
+
+                ctx.beginPath();
+                ctx.arc(x1, yOff - 20, 40, 0, Math.PI * 2);
+                ctx.arc(x2, yOff - 30, 50, 0, Math.PI * 2);
+                ctx.arc(canvas.width/2 + Math.sin(tickerTime*0.002)*60, yOff - 10, 35, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Ambient Sine Wave Equalizer audio bar height
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = activeGlowColorState + '4D';
+            ctx.beginPath();
+            const midY = canvas.height / 2;
+            const divisions = 20;
+            const spacing = canvas.width / divisions;
+            
+            // Height factoring our bass levels
+            const bassGain = (state.faderSub + state.faderLow) * 20;
+            for(let i = 0; i <= divisions; i++) {
+                const x = i * spacing;
+                const sinVal = Math.sin(x * 0.02 + tickerTime * 0.015);
+                let y = midY + sinVal * (15 + bassGain);
+                if(i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+
+            requestAnimationFrame(drawLoop);
+        }
+
+        // Synchronize States Loops
+        setInterval(fetchState, 500);
+        fetchState();
+        drawLoop();
+    </script>
+</body>
+</html>

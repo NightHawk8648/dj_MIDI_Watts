@@ -1,0 +1,272 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Universal: Build Entire Suite",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\build_suite.ps1"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Universal: Deep Test & Sync",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\activate.ps1",
+        "-DeepTest",
+        "-Refresh"
+      ],
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "build-and-launch",
+      "dependsOn": [
+        "gradle-assembleDebug",
+        "npm: build - web-ui"
+      ],
+      "dependsOrder": "parallel",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "package-exe",
+      "dependsOn": [
+        "gradle-assembleRelease"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "gradle-assembleDebug",
+      "type": "process",
+      "command": "./gradlew.bat",
+      "args": [
+        "assembleDebug"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "gradle-assembleRelease",
+      "type": "process",
+      "command": "./gradlew.bat",
+      "args": [
+        "assembleRelease"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "gradle-run-watch",
+      "type": "process",
+      "command": "./gradlew.bat",
+      "args": [
+        "assembleDebug",
+        "--continuous"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "gradle-clean",
+      "type": "process",
+      "command": "./gradlew.bat",
+      "args": [
+        "clean"
+      ],
+      "group": "build"
+    },
+    {
+      "label": "copy-exe-to-bin",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-File",
+        "${workspaceFolder}\\scripts\\copy_exe_to_bin.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Create Windows Installer",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-File",
+        "${workspaceFolder}\\scripts\\create_installer.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "chrome-pack-extension",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-File",
+        "${workspaceFolder}\\scripts\\chrome_pack_extension.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "type": "java (build)",
+      "paths": [
+        "${workspace}"
+      ],
+      "isFullBuild": false,
+      "group": "build",
+      "problemMatcher": [],
+      "label": "java (build): Build Workspace",
+      "detail": "$(tools) Build all the Java projects in workspace."
+    },
+    {
+      "label": "C++: Build with zlib",
+      "type": "shell",
+      "command": "C:/msys64/ucrt64/bin/g++.exe",
+      "args": [
+        "-g",
+        "${workspaceFolder}/desktop/hardware_manager/main.cpp",
+        "-o",
+        "${workspaceFolder}/desktop/bin/hardware_manager.exe",
+        "-lz"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "problemMatcher": [
+        "$gcc"
+      ]
+    },
+    {
+      "type": "iar",
+      "command": "build",
+      "project": "${command:iar-config.project-file}",
+      "config": "${command:iar-config.project-configuration}",
+      "builder": "${command:iar-config.toolchain}/common/bin/iarbuild.exe",
+      "label": "iar: Build Project",
+      "argumentVariablesFile": "${command:iar-config.workspace-file}",
+      "problemMatcher": [
+        "$iar-cc",
+        "$iar-linker"
+      ]
+    },
+    {
+      "label": "Master: Hardened .venv Rebuild",
+      "type": "process",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\foo.ps1",
+        "-MasterReset",
+        "-Fix"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "type": "npm",
+      "script": "install",
+      "path": "web-ui",
+      "label": "npm: install - web-ui",
+      "detail": "Install React dependencies"
+    },
+    {
+      "type": "npm",
+      "script": "build",
+      "path": "web-ui",
+      "group": "build",
+      "label": "npm: build - web-ui",
+      "detail": "Build React production bundle"
+    },
+    {
+      "type": "npm",
+      "script": "test",
+      "path": "web-ui",
+      "group": "test",
+      "problemMatcher": [],
+      "label": "npm: test - web-ui",
+      "detail": "echo \"Error: no test specified\" && exit 1"
+    },
+    {
+      "type": "cmake",
+      "label": "CMake: build",
+      "command": "build",
+      "targets": [
+        "[N/A - Select Kit]"
+      ],
+      "group": "build",
+      "problemMatcher": [],
+      "detail": "CMake template build task"
+    },
+    {
+      "label": "API: Check Telemetry",
+      "type": "shell",
+      "command": "curl",
+      "args": [
+        "http://localhost:8080/api/state"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      
+      "problemMatcher": []
+    
+    },
+    {
+            "label": "Cloud: Initialize Personal Cloud Storage",
+            "type": "shell",
+            "command": "./scripts/cloud_sync.sh",
+            "args": ["init"],
+            "problemMatcher": [],
+            "group": "none",
+            "detail": "DJ Midi Watts: Provisions remote structural directories on your cloud server."
+        },
+        {
+            "label": "Cloud: Push Workspace Binaries & Cache",
+            "type": "shell",
+            "command": "./scripts/cloud_sync.sh",
+            "args": ["push"],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "detail": "DJ Midi Watts: Packages and uploads libraries, assets, and binaries to your cloud."
+        },
+        {
+            "label": "Cloud: Pull Workspace Updates & Logs",
+            "type": "shell",
+            "command": "./scripts/cloud_sync.sh",
+            "args": ["pull"],
+            "problemMatcher": [],
+            "group": "none",
+            "detail": "DJ Midi Watts: Syncs down remote changes, logs, and application configurations."
+        },
+        {
+            "label": "Your Existing Compile/Build Task Here",
+            "type": "shell",
+            "command": "echo 'This represents a task you already have in your file'",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+    }
+}

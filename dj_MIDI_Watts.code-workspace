@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"java.import.gradle.wrapper.enabled": true,
+		"java.import.gradle.version": "8.11.1",
+		"java.configuration.updateBuildConfiguration": "automatic",
+		"google.cloud.billingQuotaProject": "DJ MIDI WATTS",
+		"google.cloud.project": "dj-midi-watts"
+	}
+}

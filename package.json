@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "agent:setup": "python agents/agent_manager.py",
+    "agent:assemble": "powershell -File agents/build_agents.ps1 assemble",
+    "agent:debug": "powershell -File agents/build_agents.ps1 debug",
+    "agent:build": "powershell -File agents/build_agents.ps1 build"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.0"
+  }
+}

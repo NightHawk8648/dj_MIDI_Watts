@@ -1,0 +1,27 @@
+l{
+  "manifest_version": 3,
+  "name": "dj_MIDI_Watts Controller",
+  "version": "1.0.0",
+  "description": "Virtual MIDI Controller and Audio FX Suite",
+  "permissions": [
+    "sidePanel",
+    "storage",
+    "midi",
+    "audioCapture"
+  ],
+  "action": {
+    "default_title": "Open Controller"
+  },
+  "side_panel": {
+    "default_path": "gui/index.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["gui/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

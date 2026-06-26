@@ -1,0 +1,21 @@
+{
+  "master": {
+    "buildCommand": "npm run build",
+    "webuiBuild": "npm run build:webui",
+    "extensionBuild": "npm run build:extension",
+    "launchConfig": "Launch Chrome",
+    "url": "http://localhost:8080"
+  },
+  "dev": {
+    "buildCommand": "npm run dev",
+    "webuiBuild": "npm run dev:webui",
+    "extensionBuild": "npm run dev:extension",
+    "launchConfig": "Launch Edge",
+    "url": "http://localhost:8080"
+  },
+  "android": {
+    "buildCommand": "./gradlew assembleDebug",
+    "launchConfig": "Android Studio: Launch App",
+    "package": "com.example.app"
+  }
+}

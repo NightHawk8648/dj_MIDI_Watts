@@ -1,0 +1,14 @@
+{
+  "name": "dj-midi-watts-web-ui",
+  "version": "1.0.0",
+  "description": "Web UI assets for DJ MIDI WATTS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node -e \"const fs = require('fs'); if (!fs.existsSync('dist')) fs.mkdirSync('dist'); fs.copyFileSync('index.html', 'dist/index.html'); fs.copyFileSync('styles.css', 'dist/styles.css'); fs.copyFileSync('script.js', 'dist/script.js');\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

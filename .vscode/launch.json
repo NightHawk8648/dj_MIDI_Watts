@@ -1,0 +1,74 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "\ud83d\ude80 RUN: Sync Engine (Python)",
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.venv/Scripts/python.exe",
+            "program": "${workspaceFolder}/scripts/sync_engine.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--ip",
+                "auto"
+            ]
+        },
+        {
+            "name": "\ud83c\udfe5 DIAG: System Health (-RunTests)",
+            "type": "powershell",
+            "request": "launch",
+            "script": "${workspaceFolder}/foo.ps1",
+            "args": [
+                "-RunTests"
+            ],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "\u267b\ufe0f  ADMIN: Master Reset (Scorch Grid)",
+            "type": "powershell",
+            "request": "launch",
+            "script": "${workspaceFolder}/foo.ps1",
+            "args": [
+                "-MasterReset"
+            ],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "\ud83e\uddf9 SECURITY: Cleanup Vault",
+            "type": "powershell",
+            "request": "launch",
+            "script": "${workspaceFolder}/foo.ps1",
+            "args": [
+                "-CleanupVault"
+            ],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "\ud83c\udfd7\ufe0f BUILD: Ultimate Assembly (Gradle)",
+            "type": "java",
+            "request": "launch",
+            "mainClass": "",
+            "projectName": "android",
+            "preLaunchTask": "gradle: ultimateGridAssembly"
+        },
+        {
+            "name": "\ud83d\udd0d AUDIT: Grid Auditor (Python Agent)",
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/.venv/Scripts/python.exe",
+            "program": "${workspaceFolder}/scripts/grid_auditor.py",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "\ud83d\udcdc SCRIPT: CS-Script Executor",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "cscs",
+            "args": [
+                "${file}"
+            ],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false
+        }
+    ]
+}

@@ -1,0 +1,250 @@
+﻿{
+    "loopmidi_running":  false,
+    "timestamp":  "2026-06-20T02:18:18Z",
+    "devices":  {
+                    "virtual":  [
+                                    {
+                                        "running":  false,
+                                        "name":  "loopMIDI Virtual Interface",
+                                        "ports":  [
+                                                      "DJ_WATTS_IN",
+                                                      "DJ_WATTS_OUT"
+                                                  ],
+                                        "installed":  false
+                                    }
+                                ],
+                    "bluetooth":  [
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{00001801-0000-1000-8000-00805F9B34FB}_VID\u0026000100E0_PID\u0026410D\\8\u00261A908B30\u00260\u0026D43A2C622E02_C00000000",
+                                          "name":  "Bluetooth Peripheral Device",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{00001116-0000-1000-8000-00805F9B34FB}_VID\u0026000100E0_PID\u0026410D\\8\u00261A908B30\u00260\u0026D43A2C622E02_C00000000",
+                                          "name":  "Personal Area Network NAP Service",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{0000110E-0000-1000-8000-00805F9B34FB}_VID\u00260001004C_PID\u00262011\\8\u00261A908B30\u00260\u0026A0A309C48F92_C00000000",
+                                          "name":  "The People\u0027s Champ Avrcp Transport",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{00001800-0000-1000-8000-00805F9B34FB}_VID\u00260001004C_PID\u00262011\\8\u00261A908B30\u00260\u0026A0A309C48F92_C00000000",
+                                          "name":  "Bluetooth Peripheral Device",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{0000110A-0000-1000-8000-00805F9B34FB}_VID\u0026000100E0_PID\u0026410D\\8\u00261A908B30\u00260\u0026D43A2C622E02_C00000000",
+                                          "name":  "Marvin The Martian  A2DP SNK",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\DEV_D43A2C622E02\\8\u00261A908B30\u00260\u0026BLUETOOTHDEVICE_D43A2C622E02",
+                                          "name":  "Marvin The Martian ",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{0000111F-0000-1000-8000-00805F9B34FB}_VID\u0026000100E0_PID\u0026410D\\8\u00261A908B30\u00260\u0026D43A2C622E02_C00000000",
+                                          "name":  "Marvin The Martian  Hands-Free HF",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{00001132-0000-1000-8000-00805F9B34FB}_VID\u0026000100E0_PID\u0026410D\\8\u00261A908B30\u00260\u0026D43A2C622E02_C00000000",
+                                          "name":  "SMS/MMS",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\DEV_16D82EC78146\\8\u00261A908B30\u00260\u0026BLUETOOTHDEVICE_16D82EC78146",
+                                          "name":  "MHT983",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{0000110C-0000-1000-8000-00805F9B34FB}_VID\u0026000100E0_PID\u0026410D\\8\u00261A908B30\u00260\u0026D43A2C622E02_C00000000",
+                                          "name":  "Marvin The Martian  Avrcp Transport",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{00001105-0000-1000-8000-00805F9B34FB}_VID\u0026000100E0_PID\u0026410D\\8\u00261A908B30\u00260\u0026D43A2C622E02_C00000000",
+                                          "name":  "Object Push Service",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{0000112D-0000-1000-8000-00805F9B34FB}_VID\u0026000100E0_PID\u0026410D\\8\u00261A908B30\u00260\u0026D43A2C622E02_C00000000",
+                                          "name":  "Sim Access Service",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{00001101-0000-1000-8000-00805F9B34FB}_VID\u00260001004C_PID\u00262011\\8\u00263F3C63A\u00260\u0026A0A309C48F92_C00000000",
+                                          "name":  "Standard Serial over Bluetooth link (COM4)",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{0000111E-0000-1000-8000-00805F9B34FB}_VID\u00260001004C_PID\u00262011\\8\u00261A908B30\u00260\u0026A0A309C48F92_C00000000",
+                                          "name":  "The People\u0027s Champ Hands-Free AG",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{0000FF01-0000-1000-8000-00805F9B34FF}_VID\u00260001004C_PID\u00262011\\8\u00261A908B30\u00260\u0026A0A309C48F92_C00000000",
+                                          "name":  "BTNOTIFYR",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{936DA01F-9ABD-4D9D-80C7-02AF85C822A8}_VID\u0026000100E0_PID\u0026410D\\8\u00261A908B30\u00260\u0026D43A2C622E02_C00000000",
+                                          "name":  " SdlRouterService",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{0000FEF3-0000-1000-8000-00805F9B34FB}_VID\u0026000100E0_PID\u0026410D\\8\u00261A908B30\u00260\u0026D43A2C622E02_C00000000",
+                                          "name":  "Bluetooth Peripheral Device",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{0000FCF1-0000-1000-8000-00805F9B34FB}_VID\u0026000100E0_PID\u0026410D\\8\u00261A908B30\u00260\u0026D43A2C622E02_C00000000",
+                                          "name":  "Bluetooth Peripheral Device",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{0000110B-0000-1000-8000-00805F9B34FB}_VID\u00260001004C_PID\u00262011\\8\u00261A908B30\u00260\u0026A0A309C48F92_C00000000",
+                                          "name":  "The People\u0027s Champ",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{0000110E-0000-1000-8000-00805F9B34FB}_VID\u0026000100E0_PID\u0026410D\\8\u00261A908B30\u00260\u0026D43A2C622E02_C00000000",
+                                          "name":  "Marvin The Martian  Avrcp Transport",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{00001855-0000-1000-8000-00805F9B34FB}_VID\u0026000100E0_PID\u0026410D\\8\u00261A908B30\u00260\u0026D43A2C622E02_C00000000",
+                                          "name":  "Bluetooth Peripheral Device",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{00001800-0000-1000-8000-00805F9B34FB}_VID\u0026000100E0_PID\u0026410D\\8\u00261A908B30\u00260\u0026D43A2C622E02_C00000000",
+                                          "name":  "Bluetooth Peripheral Device",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{0000112F-0000-1000-8000-00805F9B34FB}_VID\u0026000100E0_PID\u0026410D\\8\u00261A908B30\u00260\u0026D43A2C622E02_C00000000",
+                                          "name":  "Phonebook Access Pse Service",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{0000110B-0000-1000-8000-00805F9B34FB}_LOCALMFG\u00260002\\8\u00261A908B30\u00260\u002616D82EC78146_C00000000",
+                                          "name":  "MHT983",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{00001115-0000-1000-8000-00805F9B34FB}_VID\u0026000100E0_PID\u0026410D\\8\u00261A908B30\u00260\u0026D43A2C622E02_C00000000",
+                                          "name":  "Personal Area Network Service",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{0000110B-0000-1000-8000-00805F9B34FB}_LOCALMFG\u00260002\\8\u00261A908B30\u00260\u00265383558D538D_C00000000",
+                                          "name":  "Bluetooth",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\DEV_A0A309C48F92\\8\u00261A908B30\u00260\u0026BLUETOOTHDEVICE_A0A309C48F92",
+                                          "name":  "The People\u0027s Champ",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{A82EFA21-AE5C-3DDE-9BBC-F16DA7B16C5A}_VID\u0026000100E0_PID\u0026410D\\8\u00261A908B30\u00260\u0026D43A2C622E02_C00000000",
+                                          "name":  "NearbySharing",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{0000110E-0000-1000-8000-00805F9B34FB}_LOCALMFG\u00260002\\8\u00261A908B30\u00260\u002616D82EC78146_C00000000",
+                                          "name":  "MHT983 Avrcp Transport",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{00001801-0000-1000-8000-00805F9B34FB}_VID\u00260001004C_PID\u00262011\\8\u00261A908B30\u00260\u0026A0A309C48F92_C00000000",
+                                          "name":  "Bluetooth Peripheral Device",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{00001101-0000-1000-8000-00805F9B34FB}_LOCALMFG\u00260000\\8\u00263F3C63A\u00260\u0026000000000000_00000000",
+                                          "name":  "Standard Serial over Bluetooth link (COM5)",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{78DFA50A-FCA4-98B8-C24A-9D5E0B651547}_VID\u00260001004C_PID\u00262011\\8\u00261A908B30\u00260\u0026A0A309C48F92_C00000000",
+                                          "name":  "Bluetooth Peripheral Device",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{0000110E-0000-1000-8000-00805F9B34FB}_LOCALMFG\u00260002\\8\u00261A908B30\u00260\u00265383558D538D_C00000000",
+                                          "name":  "Bluetooth Avrcp Transport",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{DF21FE2C-2515-4FDB-8886-F12C4D67927C}_VID\u00260001004C_PID\u00262011\\8\u00261A908B30\u00260\u0026A0A309C48F92_C00000000",
+                                          "name":  "BTFASTPAIR",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\DEV_5383558D538D\\8\u00261A908B30\u00260\u0026BLUETOOTHDEVICE_5383558D538D",
+                                          "name":  "Bluetooth",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{00001112-0000-1000-8000-00805F9B34FB}_VID\u0026000100E0_PID\u0026410D\\8\u00261A908B30\u00260\u0026D43A2C622E02_C00000000",
+                                          "name":  "Headset Audio Gateway Service",
+                                          "connected":  true
+                                      },
+                                      {
+                                          "status":  "OK",
+                                          "pnp_id":  "BTHENUM\\{0000110C-0000-1000-8000-00805F9B34FB}_VID\u00260001004C_PID\u00262011\\8\u00261A908B30\u00260\u0026A0A309C48F92_C00000000",
+                                          "name":  "The People\u0027s Champ Avrcp Transport",
+                                          "connected":  true
+                                      }
+                                  ],
+                    "usb":  [
+
+                            ]
+                },
+    "warnings":  [
+                     "No USB MIDI controllers or Audio interfaces connected.",
+                     "Virtual MIDI driver (loopMIDI) is not installed. Virtual routing is offline."
+                 ],
+    "bluetooth_enabled":  true,
+    "virtual_midi_installed":  false
+}

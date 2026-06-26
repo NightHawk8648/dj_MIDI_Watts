@@ -1,0 +1,35 @@
+{
+  "mcpServers": {
+    "bob-the-builder": {
+      "command": "c:/Users/Night/dj_MIDI_Watts/.venv/Scripts/python.exe",
+      "args": [
+        "c:/Users/Night/dj_MIDI_Watts/engine.py",
+        "fix",
+        "--task",
+        "{{instructions}}"
+      ]
+    },
+    "grid-auditor": {
+      "command": "c:/Users/Night/dj_MIDI_Watts/.venv/Scripts/python.exe",
+      "args": ["-u", "c:/Users/Night/dj_MIDI_Watts/scripts/grid_auditor.py"],
+      "env": {
+        "PYTHONPATH": "c:/Users/Night/dj_MIDI_Watts;c:/Users/Night/Dropbox/IDE/Antigravity IDE/antigravity-sdk-python",
+        "PROJECT_ROOT": "c:/Users/Night/dj_MIDI_Watts"
+      }
+    },
+    "notebooks": {
+      "command": "node",
+      "args": [
+        "c:/Users/Night/dj_MIDI_Watts/scripts/mcp_tcp_client_proxy.js",
+        "9090"
+      ]
+    },
+    "visualization": {
+      "command": "node",
+      "args": [
+        "c:/Users/Night/dj_MIDI_Watts/scripts/mcp_tcp_client_proxy.js",
+        "9091"
+      ]
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "DJ MIDI WATTS - Ultima-Grid Controller",
+  "version": "1.1.0",
+  "description": "Neural Bridge for the Ultima-Grid system, featuring background telemetry sync.",
+  "permissions": [
+    "storage",
+    "alarms",
+    "activeTab",
+    "scripting",
+    "tabs",
+    "notifications",
+    "identity",
+    "desktopCapture"
+  ],
+  "host_permissions": [
+    "http://localhost:8080/*",
+    "https://localhost:5555/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "material-icon-theme.files.associations": {
+      "fileName.ts": "../../icons/sample"
+    }
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "oauth2": {
+    "client_id": "308012414081-87nplbju9ilom420b0krps5ij0aqunva.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  }
+}

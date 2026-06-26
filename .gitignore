@@ -1,0 +1,44 @@
+*.iml
+.gradle
+.kotlin
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+.env
+debug.keystore
+
+# Sensitive personal cloud credentials
+cloud_env.env
+user.env
+
+# Google Cloud Service Account and Secrets JSON files
+secrets/google-play-service.json
+dj-midi-watts-24f62c0010bd.json
+.fake
+
+# Python Virtual Environments
+.venv/
+**/venv/
+**/.venv/
+# Prevent massive logs and node dependencies from being committed
+node_modules/
+**/node_modules/
+*.log
+__pycache__/
+*.pyc
+dist/
+
+# Hard block on ALL environments and secrets
+*.env
+*.json.key
+secrets/*.json

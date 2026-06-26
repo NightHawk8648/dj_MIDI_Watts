@@ -1,0 +1,3 @@
+C:/Users/Night/dj_MIDI_Watts/desktop/python_bridge/build/CMakeFiles/python_bridge_audit.dir
+C:/Users/Night/dj_MIDI_Watts/desktop/python_bridge/build/CMakeFiles/edit_cache.dir
+C:/Users/Night/dj_MIDI_Watts/desktop/python_bridge/build/CMakeFiles/rebuild_cache.dir

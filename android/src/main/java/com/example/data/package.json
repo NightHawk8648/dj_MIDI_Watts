@@ -1,0 +1,11 @@
+{
+  "name": "dj-midi-watts-web-ui",
+  "version": "1.0.0",
+  "description": "Web UI assets for DJ MIDI WATTS Android application",
+  "scripts": {
+    "build": "mkdir -p ../app/src/main/assets/webui && cp index.html ../app/src/main/assets/webui/index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

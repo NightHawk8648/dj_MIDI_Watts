@@ -1,0 +1,92 @@
+{
+  "file": "c:\\Users\\Night\\dj_MIDI_Watts\\.venv\\Scripts\\pip.exe",
+  "sections": [
+    {
+      "name": ".text",
+      "size": 60961,
+      "virtual_address": 5368713216,
+      "file_offset": 1024,
+      "entropy": 6.412,
+      "permissions": {
+        "read": true,
+        "write": false,
+        "execute": true
+      }
+    },
+    {
+      "name": ".rdata",
+      "size": 14404,
+      "virtual_address": 5368774656,
+      "file_offset": 62464,
+      "entropy": 4.954,
+      "permissions": {
+        "read": true,
+        "write": false,
+        "execute": false
+      }
+    },
+    {
+      "name": ".data",
+      "size": 5120,
+      "virtual_address": 5368791040,
+      "file_offset": 77312,
+      "entropy": 1.981,
+      "permissions": {
+        "read": true,
+        "write": true,
+        "execute": false
+      }
+    },
+    {
+      "name": ".pdata",
+      "size": 2880,
+      "virtual_address": 5368811520,
+      "file_offset": 82432,
+      "entropy": 4.846,
+      "permissions": {
+        "read": true,
+        "write": false,
+        "execute": false
+      }
+    },
+    {
+      "name": ".rsrc",
+      "size": 21492,
+      "virtual_address": 5368815616,
+      "file_offset": 85504,
+      "entropy": 5.482,
+      "permissions": {
+        "read": true,
+        "write": false,
+        "execute": false
+      }
+    },
+    {
+      "name": ".reloc",
+      "size": 852,
+      "virtual_address": 5368840192,
+      "file_offset": 107008,
+      "entropy": 2.935,
+      "permissions": {
+        "read": true,
+        "write": false,
+        "execute": false
+      }
+    }
+  ],
+  "security": {
+    "format": "PE",
+    "architecture": "X86_64",
+    "nx": "Enabled",
+    "pie": "Enabled",
+    "relro": "N/A",
+    "canary": "Disabled",
+    "fortify": "Disabled",
+    "rpath": "N/A",
+    "stripped": "Disabled",
+    "dangerous_symbols": []
+  },
+  "security_score": 70,
+  "total_virtual_size": 105709,
+  "total_file_size": 105709
+}
