@@ -121,29 +121,29 @@ function sanitizeConfig($env) {
 }
 
 function getAndroidState($path) {
-    $ctx = stream_context_create([
-        'http' => [
-            'timeout' => 0.2, // 200ms quick timeout
-            'ignore_errors' => true
-        ]
-    ]);
-    $res = @file_get_contents('http://localhost:8080' . $path, false, $ctx);
-    if ($res === false) {
-        // Fallback to 5555 over HTTPS
-        $ctx_fallback = stream_context_create([
-            'http' => [
-                'timeout' => 0.2,
-                'ignore_errors' => true
-            ],
-            'ssl' => [
-                'verify_peer' => false,
-                'verify_peer_name' => false
-            ]
-        ]);
-        $res = @file_get_contents('https://localhost:5555' . $path, false, $ctx_fallback);
+    global $env;
+    $portsStr = $env['SERVER_FALLBACK_PORTS'] ?? '8080,8081,80,5555';
+    $portList = explode(',', $portsStr);
+    
+    $ports = [];
+    foreach ($portList as $p) {
+        $p = trim($p);
+        if (empty($p)) continue;
+        $ports[$p] = ($p == '5555') ? 'https' : 'http';
     }
-    if ($res !== false) {
-        return json_decode($res, true);
+    
+    $ctx_http = stream_context_create(['http' => ['timeout' => 0.2, 'ignore_errors' => true]]);
+    $ctx_https = stream_context_create([
+        'http' => ['timeout' => 0.2, 'ignore_errors' => true],
+        'ssl' => ['verify_peer' => false, 'verify_peer_name' => false]
+    ]);
+    
+    foreach ($ports as $port => $proto) {
+        $ctx = ($proto === 'https') ? $ctx_https : $ctx_http;
+        $res = @file_get_contents("$proto://localhost:$port$path", false, $ctx);
+        if ($res !== false) {
+            return json_decode($res, true);
+        }
     }
     return null;
 }
@@ -411,11 +411,29 @@ if ($uri === '/' || $uri === '/index.html') {
         file_put_contents($stateFile, json_encode($state));
         
         // Try to trigger in Android VM if active
-        $ctx = stream_context_create(['http' => ['method' => 'POST', 'timeout' => 0.2]]);
-        $res = @file_get_contents('http://localhost:8080/api/control?param=EQ&value=0.5', false, $ctx);
-        if ($res === false) {
-            $ctx_fallback = stream_context_create(['http' => ['method' => 'POST', 'timeout' => 0.2], 'ssl' => ['verify_peer' => false, 'verify_peer_name' => false]]);
-            @file_get_contents('https://localhost:5555/api/control?param=EQ&value=0.5', false, $ctx_fallback);
+        global $env;
+        $portsStr = $env['SERVER_FALLBACK_PORTS'] ?? '8080,8081,80,5555';
+        $portList = explode(',', $portsStr);
+        
+        $ports = [];
+        foreach ($portList as $p) {
+            $p = trim($p);
+            if (empty($p)) continue;
+            $ports[$p] = ($p == '5555') ? 'https' : 'http';
+        }
+        
+        $ctx_http = stream_context_create(['http' => ['method' => 'POST', 'timeout' => 0.2]]);
+        $ctx_https = stream_context_create([
+            'http' => ['method' => 'POST', 'timeout' => 0.2],
+            'ssl' => ['verify_peer' => false, 'verify_peer_name' => false]
+        ]);
+        
+        foreach ($ports as $port => $proto) {
+            $ctx = ($proto === 'https') ? $ctx_https : $ctx_http;
+            $res = @file_get_contents("$proto://localhost:$port/api/control?param=EQ&value=0.5", false, $ctx);
+            if ($res !== false) {
+                break; // Found the active port and triggered
+            }
         }
         
         echo json_encode(['status' => 'ok', 'question' => $questions[$category][0]]);

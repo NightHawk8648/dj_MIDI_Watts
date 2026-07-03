@@ -1,4 +1,9 @@
 // DJ MIDI WATTS - Core Controller and Visualizer Engine
+import { loginWithSpotify, handleSpotifyCallback, getSpotifyToken } from './spotify/spotify-auth.js';
+import { initializeSpotifyPlayer } from './spotify/spotify-player.js';
+import { loginWithYouTube, handleYouTubeCallback, getYouTubeToken } from './youtube/youtube-auth.js';
+import { initializeYouTubePlayer, loadYouTubeVideo } from './youtube/youtube-player.js';
+
 const host = window.location.origin;
 
 // State management
@@ -819,7 +824,119 @@ canvas.addEventListener('dblclick', () => {
     } else {
         document.exitFullscreen();
     }
+
+    // Spotify Integration Setup
+    const btnSpotifyLogin = document.getElementById('btn-spotify-login');
+    if (btnSpotifyLogin) {
+        btnSpotifyLogin.addEventListener('click', loginWithSpotify);
+    }
+
+    // Check if returning from Spotify Auth
+    const urlParams = new URLSearchParams(window.location.search);
+    const spotifyCode = urlParams.get('code');
+    if (spotifyCode) {
+        handleSpotifyCallback(spotifyCode).then(token => {
+            if (token) {
+                // Remove code from URL
+                window.history.replaceState({}, document.title, "/");
+                initializeSpotifyPlayer();
+            }
+        });
+    } else if (getSpotifyToken()) {
+        initializeSpotifyPlayer();
+    }
+
+    // YouTube Integration Setup
+    const btnYouTubeLogin = document.getElementById('btn-youtube-login');
+    if (btnYouTubeLogin) {
+        btnYouTubeLogin.addEventListener('click', loginWithYouTube);
+    }
+    
+    const btnYouTubeLoad = document.getElementById('btn-youtube-load');
+    const inputYouTubeId = document.getElementById('youtube-video-id');
+    if (btnYouTubeLoad && inputYouTubeId) {
+        btnYouTubeLoad.addEventListener('click', () => {
+            loadYouTubeVideo(inputYouTubeId.value.trim());
+        });
+    }
+
+    // Check if returning from YouTube Auth
+    const youtubeToken = handleYouTubeCallback();
+    if (youtubeToken || getYouTubeToken()) {
+        initializeYouTubePlayer();
+    }
+
+    // Legal Warning Modal Logic
+    const legalModal = document.getElementById('legal-modal');
+    const legalCheckbox = document.getElementById('legal-agree-checkbox');
+    const btnLegalConfirm = document.getElementById('btn-legal-confirm');
+    const btnLegalCancel = document.getElementById('btn-legal-cancel');
+    let pendingAction = null;
+
+    // Check if they already agreed this session
+    const hasAgreed = sessionStorage.getItem('dj_legal_agreed');
+
+    function showLegalModal(actionCallback) {
+        if (sessionStorage.getItem('dj_legal_agreed') === 'true') {
+            actionCallback();
+            return;
+        }
+        pendingAction = actionCallback;
+        legalModal.style.display = 'flex';
+        legalCheckbox.checked = false;
+        btnLegalConfirm.disabled = true;
+    }
+
+    legalCheckbox.addEventListener('change', (e) => {
+        btnLegalConfirm.disabled = !e.target.checked;
+    });
+
+    btnLegalCancel.addEventListener('click', () => {
+        legalModal.style.display = 'none';
+        pendingAction = null;
+    });
+
+    btnLegalConfirm.addEventListener('click', () => {
+        sessionStorage.setItem('dj_legal_agreed', 'true');
+        legalModal.style.display = 'none';
+        if (pendingAction) {
+            pendingAction();
+            pendingAction = null;
+        }
+    });
+
+    // Wire up any buttons that require legal consent
+    document.querySelectorAll('.btn-legal-trigger').forEach(btn => {
+        // We override their default behavior to inject the modal first
+        const originalAction = btn.onclick || (() => console.log('Action triggered'));
+        
+        // For the Spotify Download button specifically
+        if (btn.id === 'btn-spotify-download') {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showLegalModal(() => {
+                    console.log('User consented. Proceeding with download/convert...');
+                    alert('Legal consent recorded. Ready to invoke backend converter.');
+                });
+            });
+        }
+    });
+
+    // Tree Node Logic (Visual feedback)
+    document.querySelectorAll('.tree-branch li').forEach(item => {
+        item.addEventListener('click', (e) => {
+            console.log('Selected from library:', e.target.innerText);
+            // Example: load into a deck or show tracks
+        });
+    });
+
 });
+
+// Provide a global hook for the Spotify AI Sync to adjust Tempo
+window.dispatchMidiClock = (tempo) => {
+    // Basic mapping: adjust main track tempo indicator
+    document.getElementById('track-bpm-display').innerText = `TEMPO CONFIG : ${Math.round(tempo)} BPM (SYNCED) / STEREO 48KHZ`;
+};
 
 // Hook new drag and drop events
 const dropZone = document.getElementById('drop-zone');

@@ -19,5 +19,6 @@
   "gradle_versions_catalog": "gradle/libs.versions.toml",
   "gradle_wrapper_properties": "gradle/wrapper/gradle-wrapper.properties",
   "gradlew_script": "gradlew",
-  "gradlew_bat": "gradlew.bat"
+  "gradlew_bat": "gradlew.bat",
+  "python_interpreter": ".venv/Scripts/python.exe"
 }

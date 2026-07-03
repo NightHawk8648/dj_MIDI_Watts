@@ -1,27 +1,33 @@
 {
   "manifest_version": 3,
-  "name": "DJ MIDI WATTS - Ultima-Grid Controller",
-  "version": "1.1.0",
-  "description": "Neural Bridge for the Ultima-Grid system, featuring background telemetry sync.",
+  "name": "DJ MIDI WATTS",
+  "version": "1.0.0",
+  "description": "DJ MIDI WATTS - Ultimate DJ Control and Equalizer.",
   "permissions": [
     "storage",
     "alarms",
     "activeTab",
     "scripting",
     "tabs",
-    "notifications",
     "identity",
-    "desktopCapture"
+    "desktopCapture",
+    "declarativeNetRequest"
   ],
-  "host_permissions": [
-    "http://localhost:8080/*",
-    "https://localhost:5555/*"
-  ],
+  "host_permissions": ["<all_urls>"],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self';"
+  },
   "action": {
-    "default_popup": "popup.html",
-    "material-icon-theme.files.associations": {
-      "fileName.ts": "../../icons/sample"
-    }
+    "default_popup": "popup.html"
+  },
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ruleset_1",
+        "enabled": true,
+        "path": "rules.json"
+      }
+    ]
   },
   "background": {
     "service_worker": "background.js",
@@ -36,8 +42,6 @@
   ],
   "oauth2": {
     "client_id": "308012414081-87nplbju9ilom420b0krps5ij0aqunva.apps.googleusercontent.com",
-    "scopes": [
-      "https://www.googleapis.com/auth/userinfo.email"
-    ]
+    "scopes": ["https://www.googleapis.com/auth/userinfo.email"]
   }
 }

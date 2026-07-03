@@ -36,7 +36,6 @@ if ($DeepTest) {
 }
 
 $syncEnginePath = Join-Path $ScriptDir "scripts/sync_engine.py"
-$coreLogicPath = Join-Path $ScriptDir "android/src/main/java/com/example/ui/CommanderViewModel.kt"
 
 
 if (-not (Test-Path $syncEnginePath)) {

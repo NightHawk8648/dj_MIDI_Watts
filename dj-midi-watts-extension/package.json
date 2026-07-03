@@ -1,0 +1,12 @@
+{
+  "name": "dj-midi-watts-extension",
+  "version": "1.0.0",
+  "description": "DJ MIDI WATTS - Ultimate DJ Control and Equalizer.",
+  "scripts": {
+    "build": "node build.js",
+    "assemble": "npm run build"
+  },
+  "devDependencies": {
+    "archiver": "^7.0.1"
+  }
+}

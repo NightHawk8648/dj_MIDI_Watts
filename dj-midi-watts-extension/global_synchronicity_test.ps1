@@ -7,10 +7,10 @@ param(
 )
 
 $repoRoot = Resolve-Path "${PSScriptRoot}\.."
-$hostUrl = "http://localhost:8080"
+$hostUrl = "http://localhost:5555"
 $buildScript = Join-Path $repoRoot "scripts\build_and_launch.ps1"
 
-function Run-RepairCycle {
+function Start-RepairCycle {
     Write-Host "`n[REPAIR] Initializing Build & Replace Loop..." -ForegroundColor Yellow
     
     # Maintenance Request
@@ -22,7 +22,8 @@ function Run-RepairCycle {
         if ($isNonInteractive -and -not $Silent) {
             Write-Host "  - Non-interactive shell detected. Defaulting to silent mode." -ForegroundColor Gray
         }
-    } else {
+    }
+    else {
         $response = Read-Host "Would you like to perform a maintenance cleanup? (Remove temporary files, old logs, and unused libs) [Y/N]"
         if ($response -eq 'Y' -or $response -eq 'y') {
             $doMaintenance = $true
@@ -43,7 +44,7 @@ function Run-RepairCycle {
         $logPath = Join-Path $repoRoot "logs"
         if (Test-Path $logPath) {
             Write-Host "    - Clearing log history..." -ForegroundColor Gray
-            Remove-Item -Path "$logPath\*" -Include *.log,*.txt -Force -ErrorAction SilentlyContinue
+            Remove-Item -Path "$logPath\*" -Include *.log, *.txt -Force -ErrorAction SilentlyContinue
         }
 
         # 3. Unused Libs
@@ -115,27 +116,32 @@ Write-Host "[FORMAT] MOBILE (Android/Flutter)" -ForegroundColor Magenta
 $mobileHealthy = $true
 if (Get-Command flutter -ErrorAction SilentlyContinue) {
     Write-Host "  - SDK: Flutter detected." -ForegroundColor Green
-} else {
+}
+else {
     $mobileHealthy = $false
 }
 if (Get-Command adb -ErrorAction SilentlyContinue) {
     $devices = adb devices | Select-String -Pattern "\tdevice$"
     if ($devices) {
         Write-Host "  - Connectivity: ADB Active ($($devices.Count) device(s) linked)." -ForegroundColor Green
-    } else {
+    }
+    else {
         Write-Warning "  - Connectivity: ADB running but no devices found."
     }
-} else {
+}
+else {
     $mobileHealthy = $false
     Write-Error "  - Connectivity: ADB (Android Debug Bridge) not found."
 }
+[void]$mobileHealthy
 
 # 2. WEB FORMAT (WebUI / UI Hub)
 Write-Host "`n[FORMAT] WEB (HTML5/JavaScript)" -ForegroundColor Magenta
 try {
-    $webResponse = Invoke-WebRequest -Uri $hostUrl -UseBasicParsing -TimeoutSec 2
+    $null = Invoke-WebRequest -Uri $hostUrl -UseBasicParsing -TimeoutSec 2
     Write-Host "  - Hub: WebUI reachable at $hostUrl" -ForegroundColor Green
-} catch {
+}
+catch {
     Write-Warning "  - Hub: WebUI offline. Local synchronization hub is not responding."
 }
 
@@ -145,7 +151,8 @@ $extPath = Join-Path $repoRoot "dj-midi-watts-extension"
 $extHealthy = $true
 if (Test-Path (Join-Path $extPath "manifest.json")) {
     Write-Host "  - State: Extension package valid." -ForegroundColor Green
-} else {
+}
+else {
     Write-Error "  - State: manifest.json missing in extension directory."
 }
 
@@ -161,14 +168,15 @@ if (Test-Path $jarPath) {
 }
 if (Test-Path $exePath) {
     Write-Host "  - Artifact: Native EXE found." -ForegroundColor Green
-} else {
+}
+else {
     $desktopHealthy = $false
     Write-Warning "  - Artifact: Desktop binary missing. Sync check partial."
 }
 
 # Trigger Repair Loop if any artifacts are missing and -Repair was requested
 if ($Repair -and (-not $desktopHealthy -or -not $extHealthy)) {
-    Run-RepairCycle
+    Start-RepairCycle
     Write-Host "`n[REPAIR] Cycle Complete. Re-verifying artifacts..." -ForegroundColor Cyan
 }
 
@@ -182,10 +190,12 @@ try {
         Write-Host "  - Status: FULLY SYNCHRONIZED" -ForegroundColor Green
         Write-Host "  - Active Track: $($state.current_track)" -ForegroundColor Gray
         Write-Host "  - Resonance Color: $($state.theme_color)" -ForegroundColor Gray
-    } else {
+    }
+    else {
         Write-Warning "  - Status: PARTIAL SYNC (Verify MIDI Hardware or AI S1 Link)."
     }
-} catch {
+}
+catch {
     Write-Error "  - Telemetry: HUB API unreachable. Synchronized rendering is currently disabled."
 }
 

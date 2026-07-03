@@ -1,0 +1,13 @@
+.git
+.venv
+node_modules
+desktop/node_modules
+web-ui/node_modules
+*.log
+.vscode
+.gradle
+build/
+android/build/
+desktop/build/
+flutter_ui/build/
+.idea

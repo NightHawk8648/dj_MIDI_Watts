@@ -1,7 +1,37 @@
 // DJ MIDI WATTS Browser Extension Core Sync Model
-let hostUrl = 'http://localhost:8080';
-const primaryUrl = 'http://localhost:8080';
-const fallbackUrl = 'https://localhost:5555';
+
+let hostUrl = 'https://djmidiwatts-live.app'; // Gets updated dynamically
+
+// Retrieve the active server discovered by background.js
+chrome.storage.local.get(['activeHostUrl']).then((res) => {
+    if (res.activeHostUrl) {
+        hostUrl = res.activeHostUrl;
+    } else {
+        // If nothing is cached, ask background to discover and return it
+        chrome.runtime.sendMessage({ action: "forceDiscovery" }).then((response) => {
+            if (response && response.url) {
+                hostUrl = response.url;
+            }
+        }).catch(err => console.warn(err));
+    }
+}).catch(err => console.error(err));
+
+// Authenticated fetch wrapper for Google Cloud API
+async function authFetch(url, options = {}) {
+    try {
+        const { token } = await chrome.identity.getAuthToken({ interactive: true });
+        if (!token) throw new Error("Token fetch failed");
+        
+        const headers = options.headers || {};
+        headers['Authorization'] = `Bearer ${token}`;
+        
+        return await fetch(url, { ...options, headers });
+    } catch (error) {
+        console.error("[Auth] Token fetch failed", error);
+        throw error;
+    }
+}
+
 
 // DOM elements
 const connStatus = document.getElementById('connection-status');
@@ -34,7 +64,11 @@ const fValLabels = {
 
 // Update fader endpoint call
 function transmitControl(param, value) {
-    fetch(`${hostUrl}/api/control?param=${param}&value=${value}`)
+    const url = new URL('/api/control', hostUrl);
+    url.searchParams.append('param', param);
+    url.searchParams.append('value', value);
+
+    authFetch(url.toString())
         .then(res => res.json())
         .then(data => {
             console.log(`Synced control: ${param} -> ${value}`, data);
@@ -47,7 +81,13 @@ function transmitTrigger(fx, value = null) {
     const subLevel = faders.faderSub ? parseFloat(faders.faderSub.value) : 0;
     const visualValue = (fx === 'strobe') ? subLevel : value;
 
-    fetch(`${hostUrl}/api/trigger?fx=${fx}${value !== null ? '&value=' + value : ''}`)
+    const url = new URL('/api/trigger', hostUrl);
+    url.searchParams.append('fx', fx);
+    if (value !== null) {
+        url.searchParams.append('value', value);
+    }
+
+    authFetch(url.toString())
         .then(res => res.json())
         .then(data => {
             console.log(`Triggered: ${fx}`, data);
@@ -69,7 +109,7 @@ function transmitTrigger(fx, value = null) {
 // Polling and sync
 function renderGridState(data) {
     // Send connection status to background script
-    const status = "connected";
+    const status = data.isMidiHardwareConnected ? "connected" : "disconnected";
     if (lastStatus !== status && chrome.runtime?.id) {
         chrome.runtime.sendMessage({ status }).catch(() => {});
         lastStatus = status;
@@ -126,43 +166,41 @@ function renderGridState(data) {
     }
 }
 
-function fetchState() {
-    fetch(`${hostUrl}/api/state`)
+function fetchState(attempts = 0) {
+    // Only attempt once since we are using a single cloud API endpoint
+    if (attempts >= 1) {
+        connStatus.innerText = 'OFFLINE';
+        connStatus.className = 'status status-offline';
+        const status = "disconnected";
+        if (lastStatus !== status && chrome.runtime?.id) {
+            chrome.runtime.sendMessage({ status }).catch(() => {});
+            lastStatus = status;
+        }
+        
+        // The server dropped offline. Ask background to run the discovery cascade again to find the fallback
+        chrome.runtime.sendMessage({ action: "forceDiscovery" }).then((response) => {
+            if (response && response.url && response.url !== hostUrl) {
+                hostUrl = response.url;
+                console.log(`[Popup] Switched to fallback server: ${hostUrl}`);
+            }
+        }).catch(err => console.warn(err));
+        
+        return;
+    }
+
+    authFetch(`${hostUrl}/api/state`)
         .then(res => {
             if (!res.ok) throw new Error('Unhealthy portal state');
             return res.json();
         })
         .then(data => renderGridState(data))
         .catch(err => {
-            const retryUrl = (hostUrl === primaryUrl) ? fallbackUrl : primaryUrl;
-            fetch(`${retryUrl}/api/state`)
-                .then(res => {
-                    if (!res.ok) throw new Error('Unhealthy portal state');
-                    return res.json();
-                })
-                .then(data => {
-                    hostUrl = retryUrl;
-                    renderGridState(data);
-                })
-                .catch(err2 => {
-                    hostUrl = primaryUrl;
-                    connStatus.innerText = 'OFFLINE';
-                    connStatus.className = 'status status-offline';
-                    const status = "disconnected";
-                    if (lastStatus !== status && chrome.runtime?.id) {
-                        chrome.runtime.sendMessage({ status }).catch(() => {});
-                        lastStatus = status;
-                    }
-                });
+            console.error("[Popup] API connection failed", err);
+            fetchState(attempts + 1);
         });
 }
 
-// Listen for immediate WebSocket updates from background.js
-chrome.runtime.onMessage.addListener((message) => {
-    if (message.action === "updateUI" && message.state) {
-        renderGridState(message.state);
-    }
-});
+
 
 // Attach slide input listeners dynamically
 Object.keys(faders).forEach(key => faders[key].addEventListener('input', (e) => {

@@ -3,6 +3,31 @@
  * Non-intrusive ambient effects layer
  */
 
+// ============================================================================
+// SAFETY SAFEGUARDS: Prevent execution on banking, secure, or conflicting sites
+// ============================================================================
+(function() {
+const currentUrl = window.location.href;
+const restrictedPatterns = [
+    /bank/i,
+    /finance/i,
+    /paypal\.com/i,
+    /stripe\.com/i,
+    /secure/i,
+    /checkout/i,
+    /auth0\.com/i,
+    /okta\.com/i,
+    /apple\.com/i,
+    // Add specific competing Web MIDI platforms if needed
+    /soundtrap\.com/i,
+    /bandlab\.com/i
+];
+
+if (restrictedPatterns.some(pattern => pattern.test(currentUrl))) {
+    // Silently abort execution on restricted domains
+    return;
+}
+
 // Initialize canvas/overlay wrappers safely on the host page DOM
 const fxContainer = document.createElement('div');
 fxContainer.id = 'midi-watts-fx-layer';
@@ -71,12 +96,13 @@ document.head.appendChild(style);
 
 // Listen for commands broadcast from background.js
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    const { fx, value } = request;
     const { fx, value, color } = request;
 
     // Update the local theme resonance if a new color is provided
     if (color) {
-        fxContainer.style.setProperty('--watts-theme-color', color);
+        const hexRegex = /^#(?:[0-9a-fA-F]{3}){1,2}$/;
+        const safeColor = hexRegex.test(color) ? color : '#00FFCC';
+        fxContainer.style.setProperty('--watts-theme-color', safeColor);
     }
 
     if (fx === 'strobe') {
@@ -85,7 +111,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         // dynamic values accepted between 0 and 1
         adjustFogger(value !== null ? value : 0.5);
     } else if (fx === 'laser') {
-        triggerLaserShow(request.color);
         // Use passed color or fallback to current theme variable
         triggerLaserShow(color || getComputedStyle(fxContainer).getPropertyValue('--watts-theme-color'));
     } else if (fx === 'spotify_toggle' && window.location.hostname.includes('spotify.com')) {
@@ -170,3 +195,4 @@ function triggerLaserShow(color = '#00FFCC') {
         laser.remove();
     }, 1200);
 }
+})();

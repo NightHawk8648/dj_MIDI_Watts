@@ -178,6 +178,7 @@ android {
     buildConfigField("String", "GCP_CLOUD_RUN_URL", escapeBuildConfigString(cloudEnv["GCP_CLOUD_RUN_URL"] ?: ""))
     buildConfigField("String", "ENVIRONMENT", escapeBuildConfigString(cloudEnv["ENVIRONMENT"] ?: "production"))
     buildConfigField("String", "GOOGLE_CLIENT_ID", escapeBuildConfigString(googleClientId))
+    buildConfigField("String", "SERVER_FALLBACK_PORTS", escapeBuildConfigString(cloudEnv["SERVER_FALLBACK_PORTS"] ?: "8080,8081,80,5555"))
   }
 
   signingConfigs {
@@ -257,7 +258,7 @@ secrets {
 // Some unused dependencies are commented out below instead of being removed.
 // This makes it easy to add them back in the future if needed.
 dependencies {
-  implementation(project(":flutter"))
+  // implementation(project(":flutter"))
   implementation(platform(libs.androidx.compose.bom))
   implementation(platform(libs.firebase.bom))
   implementation(libs.accompanist.permissions)
@@ -416,11 +417,7 @@ val buildWebUi by tasks.registering {
             return@doLast
         }
         val isWindows = System.getProperty("os.name").lowercase().contains("win")
-        val npmExecutable = if (isWindows) findExecutable("npm.cmd", "npm") else findExecutable("npm", "npm.cmd")
-        if (npmExecutable == null) {
-            slf4jLogger.info("⚠️ npm is not available. Skipping web-ui build.")
-            return@doLast
-        }
+        val npmExecutable = if (isWindows) "npm.cmd" else "npm"
 
         val webUiDir = file("${project.rootDir}/web-ui")
         val nodeModulesDir = file("${project.rootDir}/web-ui/node_modules")

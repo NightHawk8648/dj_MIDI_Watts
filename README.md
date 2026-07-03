@@ -168,3 +168,31 @@ Paste your server's Tailscale IP (100.x.x.x), your username, and your Nextcloud 
 
 Click Test & Sync. Your workspace, application binaries, caches, and runtime logs will now sync completely automatically across all your devices!
 
+---
+
+## 🎵 Spotify Integration Setup
+
+To enable the Spotify Premium Sync and AI Equalizer visualizer, follow these steps:
+
+### How to Create a Spotify Client ID
+1. **Go to the Dashboard:** Open your browser and navigate to the [Spotify for Developers Dashboard](https://developer.spotify.com/dashboard).
+2. **Log In:** Log in with your primary Spotify account (must be Premium).
+3. **Create an App:**
+   - Click the **"Create App"** button.
+   - **App Name:** `DJ MIDI Watts` (or whatever you prefer)
+   - **App Description:** `Web player and AI Equalizer syncing for DJ MIDI Watts.`
+   - **Website:** You can leave this blank for now.
+   - **Redirect URIs:** This is crucial. Add exactly: `http://localhost:8080` (and any other domain you plan to host the UI on in the future).
+   - Check the **"Web Playback SDK"** and **"Web API"** boxes if it asks for APIs used.
+   - Agree to the Terms of Service and click **Save**.
+4. **Copy the Client ID:**
+   - Once your app is created, click the **Settings** button for the app.
+   - You will see your **Client ID** (a long string of random letters and numbers). Copy it!
+5. **Update your Environment:**
+   - Open your `user.env` file.
+   - On line 54, replace `YOUR_SPOTIFY_CLIENT_ID` with the Client ID you just copied:
+     ```env
+     SPOTIFY_CLIENT_ID="1234567890abcdef1234567890abcdef"
+     ```
+
+Once you do that, open your Web UI, click **"LOGIN WITH SPOTIFY"**, and the player will connect to your account and start syncing MIDI tempos and EQ visualizations!

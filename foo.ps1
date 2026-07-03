@@ -500,29 +500,28 @@ if ($adbOk) {
             if ($routeInfo -match "src\s+([0-9.]+)") { $deviceIp = $Matches[1] }
         }
 
-        $targetUrl = if ($deviceIp) { "http://$($deviceIp):$($WebPort)/api/state" } else { "http://localhost:$($WebPort)/api/state" }
+        $portsToTry = @(8080, 8081, 80, 5555)
         
-        try {
-            # Probing the port for the Overseer's response
-            $response = Invoke-RestMethod -Uri $targetUrl -Method Get -TimeoutSec 2 -ErrorAction Stop
-            if ($response) {
-                $bpm = $response.bpm
-                # Handle cases where the full state or sub-segmented sync is returned
-                $tier = if ($response.account) { $response.account.type } else { "Operative" }
-                if ($response.telemetry) {
-                    $mem = $response.telemetry.memory_usage
-                    Write-Host " -> Telemetry: $mem% Memory Usage" -ForegroundColor Gray
+        $envCloudFile = Join-Path $PSScriptRoot "cloud_env.env"
+        if (Test-Path $envCloudFile) {
+            $lines = Get-Content $envCloudFile
+            foreach ($line in $lines) {
+                if ($line -match "^SERVER_FALLBACK_PORTS=(.*)") { 
+                    $portStr = $Matches[1].Trim("`"' ") 
+                    $portsToTry = $portStr -split "," | ForEach-Object { [int]$_.Trim() }
                 }
-                Write-Host "[ONLINE] Grid API is responsive at $targetUrl" -ForegroundColor Green
-                Write-Host " -> Pulse: $bpm BPM" -ForegroundColor Gray
-                Write-Host " -> Auth: $tier Tier established." -ForegroundColor Gray # This line is unchanged
             }
-        } catch {
-            Write-Host "[WARN] Port $($WebPort) is dark. Attempting fallback to https://localhost:5555..." -ForegroundColor Yellow
-            $fallbackUrl = if ($deviceIp) { "https://$($deviceIp):5555/api/state" } else { "https://localhost:5555/api/state" }
+        }
+
+        $foundActivePort = $false
+
+        foreach ($p in $portsToTry) {
+            $proto = if ($p -eq 5555) { "https" } else { "http" }
+            $targetUrl = if ($deviceIp) { "${proto}://$($deviceIp):$($p)/api/state" } else { "${proto}://localhost:$($p)/api/state" }
+            
             try {
-                [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}
-                $response = Invoke-RestMethod -Uri $fallbackUrl -Method Get -TimeoutSec 2 -ErrorAction Stop
+                if ($p -eq 5555) { [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true} }
+                $response = Invoke-RestMethod -Uri $targetUrl -Method Get -TimeoutSec 2 -ErrorAction Stop
                 if ($response) {
                     $bpm = $response.bpm
                     $tier = if ($response.account) { $response.account.type } else { "Operative" }
@@ -530,13 +529,19 @@ if ($adbOk) {
                         $mem = $response.telemetry.memory_usage
                         Write-Host " -> Telemetry: $mem% Memory Usage" -ForegroundColor Gray
                     }
-                    Write-Host "[ONLINE] Grid API is responsive at fallback $fallbackUrl" -ForegroundColor Green
+                    Write-Host "[ONLINE] Grid API is responsive at $targetUrl" -ForegroundColor Green
                     Write-Host " -> Pulse: $bpm BPM" -ForegroundColor Gray
                     Write-Host " -> Auth: $tier Tier established." -ForegroundColor Gray
+                    $foundActivePort = $true
+                    break
                 }
             } catch {
-                Write-Host "[OFFLINE] Both Port $($WebPort) and Fallback Port 5555 are dark. Is the Program running?" -ForegroundColor Red
+                Write-Host "[WARN] Port $p is dark. Trying next fallback..." -ForegroundColor Yellow
             }
+        }
+
+        if (-not $foundActivePort) {
+            Write-Host "[OFFLINE] All ports (8080, 8081, 80, 5555) are dark. Is the Program running?" -ForegroundColor Red
         }
 
     } else {

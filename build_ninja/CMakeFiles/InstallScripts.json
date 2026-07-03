@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/Users/Night/dj_MIDI_Watts/build_ninja/cmake_install.cmake",
+		"C:/Users/Night/dj_MIDI_Watts/build_ninja/_deps/zlib-build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

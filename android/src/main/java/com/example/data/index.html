@@ -1,4 +1,4 @@
-u<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -106,7 +106,7 @@ u<!DOCTYPE html>
                         <div class="flex flex-col items-center gap-3 bg-slate-950/40 border border-slate-800/60 p-4 rounded-xl">
                             <span class="text-[9px] font-bold text-slate-400">SUB</span>
                             <div class="flex-1 relative flex justify-center">
-                                <input type="range" id="faderSub" min="0" max="1" step="0.01" class="slide-thumb h-full w-2 bg-slate-800 rounded-lg appearance-none cursor-pointer orientation-vertical" style="writing-mode: bt-lr; -webkit-appearance: slider-vertical;" oninput="updateFader('faderSub', this.value)">
+                                <input type="range" title="Sub Fader" id="faderSub" min="0" max="1" step="0.01" class="slide-thumb h-full w-2 bg-slate-800 rounded-lg appearance-none cursor-pointer orientation-vertical" style="writing-mode: bt-lr; -webkit-appearance: slider-vertical;" oninput="updateFader('faderSub', this.value)">
                             </div>
                             <span id="faderSub-lbl" class="text-[10px] text-[#00FFCC] font-bold">30%</span>
                         </div>
@@ -114,7 +114,7 @@ u<!DOCTYPE html>
                         <div class="flex flex-col items-center gap-3 bg-slate-950/40 border border-slate-800/60 p-4 rounded-xl">
                             <span class="text-[9px] font-bold text-slate-400">LOW</span>
                             <div class="flex-1 relative flex justify-center">
-                                <input type="range" id="faderLow" min="0" max="1" step="0.01" class="slide-thumb h-full w-2 bg-slate-800 rounded-lg appearance-none cursor-pointer orientation-vertical" style="writing-mode: bt-lr; -webkit-appearance: slider-vertical;" oninput="updateFader('faderLow', this.value)">
+                                <input type="range" title="Low Fader" id="faderLow" min="0" max="1" step="0.01" class="slide-thumb h-full w-2 bg-slate-800 rounded-lg appearance-none cursor-pointer orientation-vertical" style="writing-mode: bt-lr; -webkit-appearance: slider-vertical;" oninput="updateFader('faderLow', this.value)">
                             </div>
                             <span id="faderLow-lbl" class="text-[10px] text-[#00FFCC] font-bold">40%</span>
                         </div>
@@ -122,7 +122,7 @@ u<!DOCTYPE html>
                         <div class="flex flex-col items-center gap-3 bg-slate-950/40 border border-slate-800/60 p-4 rounded-xl">
                             <span class="text-[9px] font-bold text-slate-400">MID</span>
                             <div class="flex-1 relative flex justify-center">
-                                <input type="range" id="faderMid" min="0" max="1" step="0.01" class="slide-thumb h-full w-2 bg-slate-800 rounded-lg appearance-none cursor-pointer orientation-vertical" style="writing-mode: bt-lr; -webkit-appearance: slider-vertical;" oninput="updateFader('faderMid', this.value)">
+                                <input type="range" title="Mid Fader" id="faderMid" min="0" max="1" step="0.01" class="slide-thumb h-full w-2 bg-slate-800 rounded-lg appearance-none cursor-pointer orientation-vertical" style="writing-mode: bt-lr; -webkit-appearance: slider-vertical;" oninput="updateFader('faderMid', this.value)">
                             </div>
                             <span id="faderMid-lbl" class="text-[10px] text-[#00FFCC] font-bold">50%</span>
                         </div>
@@ -130,7 +130,7 @@ u<!DOCTYPE html>
                         <div class="flex flex-col items-center gap-3 bg-slate-950/40 border border-slate-800/60 p-4 rounded-xl">
                             <span class="text-[9px] font-bold text-slate-400">VOCAL</span>
                             <div class="flex-1 relative flex justify-center">
-                                <input type="range" id="faderVocal" min="0" max="1" step="0.01" class="slide-thumb h-full w-2 bg-slate-800 rounded-lg appearance-none cursor-pointer orientation-vertical" style="writing-mode: bt-lr; -webkit-appearance: slider-vertical;" oninput="updateFader('faderVocal', this.value)">
+                                <input type="range" title="Vocal Fader" id="faderVocal" min="0" max="1" step="0.01" class="slide-thumb h-full w-2 bg-slate-800 rounded-lg appearance-none cursor-pointer orientation-vertical" style="writing-mode: bt-lr; -webkit-appearance: slider-vertical;" oninput="updateFader('faderVocal', this.value)">
                             </div>
                             <span id="faderVocal-lbl" class="text-[10px] text-[#00FFCC] font-bold">50%</span>
                         </div>
@@ -138,7 +138,7 @@ u<!DOCTYPE html>
                         <div class="flex flex-col items-center gap-3 bg-slate-950/40 border border-slate-800/60 p-4 rounded-xl">
                             <span class="text-[9px] font-bold text-slate-400">TREBLE</span>
                             <div class="flex-1 relative flex justify-center">
-                                <input type="range" id="faderHigh" min="0" max="1" step="0.01" class="slide-thumb h-full w-2 bg-slate-800 rounded-lg appearance-none cursor-pointer orientation-vertical" style="writing-mode: bt-lr; -webkit-appearance: slider-vertical;" oninput="updateFader('faderHigh', this.value)">
+                                <input type="range" title="Treble Fader" id="faderHigh" min="0" max="1" step="0.01" class="slide-thumb h-full w-2 bg-slate-800 rounded-lg appearance-none cursor-pointer orientation-vertical" style="writing-mode: bt-lr; -webkit-appearance: slider-vertical;" oninput="updateFader('faderHigh', this.value)">
                             </div>
                             <span id="faderHigh-lbl" class="text-[10px] text-[#00FFCC] font-bold">60%</span>
                         </div>
@@ -157,14 +157,14 @@ u<!DOCTYPE html>
                                         <span>CC-20 (LOW BASS)</span>
                                         <span id="cc-20-lbl">40%</span>
                                     </div>
-                                    <input type="range" min="0" max="1" step="0.01" id="midi-knob-low" class="slide-thumb w-full h-1 bg-slate-800 appearance-none cursor-pointer rounded" oninput="triggerMidiControl('midi_cc_low', this.value)">
+                                    <input type="range" title="CC-20 Low Bass" min="0" max="1" step="0.01" id="midi-knob-low" class="slide-thumb w-full h-1 bg-slate-800 appearance-none cursor-pointer rounded" oninput="triggerMidiControl('midi_cc_low', this.value)">
                                 </div>
                                 <div>
                                     <div class="flex justify-between text-[10px] text-slate-400 mb-1">
                                         <span>CC-21 (STROBE RATE)</span>
                                         <span id="cc-21-lbl">100 BPM</span>
                                     </div>
-                                    <input type="range" min="0" max="1" step="0.01" id="midi-knob-strobe" class="slide-thumb w-full h-1 bg-slate-800 appearance-none cursor-pointer rounded" oninput="triggerMidiControl('midi_cc_strobe', this.value)">
+                                    <input type="range" title="CC-21 Strobe Rate" min="0" max="1" step="0.01" id="midi-knob-strobe" class="slide-thumb w-full h-1 bg-slate-800 appearance-none cursor-pointer rounded" oninput="triggerMidiControl('midi_cc_strobe', this.value)">
                                 </div>
                             </div>
                         </div>

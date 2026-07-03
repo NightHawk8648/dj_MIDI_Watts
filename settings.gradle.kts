@@ -26,9 +26,9 @@ rootProject.name = "DJ MIDI WATTS"
 
 include(":android")
 
-val flutterProjectRoot = File(settingsDir, "flutter_ui")
-val includeFlutterScript = File(flutterProjectRoot, ".android/include_flutter.groovy")
-
-if (includeFlutterScript.exists()) {
-    apply(from = includeFlutterScript)
-}
+// val flutterProjectRoot = File(settingsDir, "flutter_ui")
+// val includeFlutterScript = File(flutterProjectRoot, ".android/include_flutter.groovy")
+// 
+// if (includeFlutterScript.exists()) {
+//     apply(from = includeFlutterScript)
+// }

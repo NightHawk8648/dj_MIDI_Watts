@@ -1,0 +1,3 @@
+C:/Users/Night/dj_MIDI_Watts/build_ninja/_deps/zlib-subbuild/CMakeFiles/zlib-populate.dir
+C:/Users/Night/dj_MIDI_Watts/build_ninja/_deps/zlib-subbuild/CMakeFiles/edit_cache.dir
+C:/Users/Night/dj_MIDI_Watts/build_ninja/_deps/zlib-subbuild/CMakeFiles/rebuild_cache.dir

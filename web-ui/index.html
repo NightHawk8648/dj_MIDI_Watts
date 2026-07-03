@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DJ MIDI WATTS BOARD</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="spotify.css">
+    <link rel="stylesheet" href="youtube.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet" crossorigin="anonymous">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/icon-192.png">
+    <!-- Web Playback APIs -->
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body class="dj-board-theme">
     <div class="stars-overlay"></div>
@@ -78,6 +85,46 @@
                 <button class="fx-btn" id="btn-laser">LASER</button>
                 <button class="fx-btn" id="btn-spotify">SPOTIFY</button>
             </div>
+        <!-- Section 2.5: Spotify Integration Panel -->
+        <section class="board-card spotify-section">
+            <h2 class="card-title">SPOTIFY PREMIUM SYNC</h2>
+            <div class="spotify-auth-area">
+                <button class="board-action-btn" id="btn-spotify-login">LOGIN WITH SPOTIFY</button>
+                <span id="spotify-status">Waiting for Login...</span>
+            </div>
+            <div class="spotify-player-ui">
+                <img id="spotify-album-art" src="" alt="Album Art" style="width: 100px; height: 100px; background: #222; border-radius: 4px;" />
+                <div class="spotify-meta">
+                    <div id="spotify-track-name" style="font-weight: bold; color: #fff;">No Track Playing</div>
+                    <div id="spotify-artist-name" style="color: #0ff;">-</div>
+                </div>
+            </div>
+            <div class="spotify-visualizer">
+                <span class="hud-item" style="display:block; margin-bottom: 5px;">AI EQUALIZER SYNC</span>
+                <canvas id="spotify-eq-canvas" width="400" height="80" style="background: rgba(0,0,0,0.5); width: 100%; border: 1px solid #333;"></canvas>
+            </div>
+        </section>
+
+        <!-- Section 2.6: YouTube Integration Panel -->
+        <section class="board-card youtube-section">
+            <h2 class="card-title">YOUTUBE DECK SYNC</h2>
+            <div class="youtube-auth-area">
+                <button class="board-action-btn" id="btn-youtube-login" style="background-color: #FF0000; color: white;">LOGIN WITH YOUTUBE</button>
+                <span id="youtube-status">Waiting for Login...</span>
+            </div>
+            
+            <div class="youtube-search-area" style="margin-bottom: 10px;">
+                <input type="text" id="youtube-video-id" placeholder="Paste Video ID (e.g. dQw4w9WgXcQ)" style="padding: 5px; width: 60%; background: #222; color: white; border: 1px solid #555;">
+                <button class="board-action-btn" id="btn-youtube-load" style="background-color: #555;">LOAD VIDEO</button>
+            </div>
+
+            <div class="youtube-player-ui">
+                <div id="yt-player-container"></div>
+                <div class="youtube-meta" style="margin-top: 10px;">
+                    <div id="youtube-track-name" style="font-weight: bold; color: #fff;">No Video Loaded</div>
+                    <div id="youtube-artist-name" style="color: #ffaaaa;">-</div>
+                </div>
+            </div>
         </section>
 
         <!-- Section 3: Kinetic Video Projection -->
@@ -129,6 +176,41 @@
                     </div>
                 </div>
 
+                <!-- Library Tree Panel -->
+                <div class="library-tree-panel" style="margin-bottom: 20px;">
+                    <h3 class="subsection-title">MEDIA LIBRARY</h3>
+                    <div class="tree-container">
+                        <details class="tree-node">
+                            <summary>📁 Local Device</summary>
+                            <ul class="tree-branch">
+                                <li>🎵 My DJ Mixes</li>
+                                <li>🎵 Stems</li>
+                            </ul>
+                        </details>
+                        <details class="tree-node">
+                            <summary>☁️ Personal Cloud (Nextcloud)</summary>
+                            <ul class="tree-branch">
+                                <li>🎵 Sync_Folder</li>
+                                <li>🎵 Cloud_Beat_128.mp3</li>
+                            </ul>
+                        </details>
+                        <details class="tree-node">
+                            <summary>🟢 Spotify</summary>
+                            <ul class="tree-branch">
+                                <li>🎵 Liked Songs</li>
+                                <li>🎵 Party Playlist</li>
+                            </ul>
+                        </details>
+                        <details class="tree-node">
+                            <summary>🔴 YouTube</summary>
+                            <ul class="tree-branch">
+                                <li>🎵 Video Library</li>
+                                <li>🎵 Favourites</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+
                 <!-- Media Source Loader & Selector -->
                 <div class="source-loader-panel">
                     <h3 class="subsection-title">LOAD MEDIA SOURCE</h3>
@@ -145,7 +227,7 @@
                         <div class="spotify-loader-row">
                             <input type="text" id="spotify-track-input" placeholder="Paste Spotify Track URL / ID (e.g. 4PTG3ZdBGkC6n...)" title="Spotify Track Link">
                             <button class="board-action-btn" id="btn-spotify-load">LOAD SPOTIFY</button>
-                            <button class="board-action-btn" id="btn-spotify-download" title="Download Spotify Track">📥 DOWNLOAD</button>
+                            <button class="board-action-btn btn-legal-trigger" id="btn-spotify-download" title="Download Spotify Track">📥 DOWNLOAD</button>
                         </div>
 
                         <!-- Personal Cloud list -->
@@ -378,6 +460,33 @@
         </section>
     </main>
 
-    <script src="script.js"></script>
+    <!-- Legal Warning Modal -->
+    <div id="legal-modal" class="modal-overlay">
+        <div class="modal-content legal-modal-box">
+            <h2 style="color: red; text-transform: uppercase;">⚠️ Copyright & Legal Warning ⚠️</h2>
+            <p><strong>WARNING:</strong> The reproduction, distribution, and resale of copyrighted music without explicit authorization from the copyright holder is a violation of international copyright laws (e.g., DMCA). Penalties can include severe civil fines and criminal prosecution.</p>
+            <p>DJ MIDI Watts does not condone or facilitate piracy. This media conversion tool is strictly for fair-use analysis, original creation, and authorized remixing of media you legally own or have permission to use.</p>
+            <label class="legal-checkbox-label">
+                <input type="checkbox" id="legal-agree-checkbox">
+                <strong>I AGREE to the terms and accept full legal responsibility for my actions.</strong>
+            </label>
+            <div style="margin-top: 20px; text-align: right;">
+                <button class="board-action-btn" id="btn-legal-cancel">CANCEL</button>
+                <button class="board-action-btn" id="btn-legal-confirm" disabled style="background: red; color: white;">CONFIRM</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Logic -->
+    <script type="module" src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('ServiceWorker registered!', reg))
+                    .catch(err => console.error('ServiceWorker registration failed:', err));
+            });
+        }
+    </script>
 </body>
 </html>

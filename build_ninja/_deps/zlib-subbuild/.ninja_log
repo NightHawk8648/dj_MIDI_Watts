@@ -1,0 +1,21 @@
+# ninja log v7
+5	252	8046885162002065	zlib-populate-prefix/src/zlib-populate-stamp/zlib-populate-mkdir	de7f67bf68699e0d
+5	252	8046885162002065	C:/Users/Night/dj_MIDI_Watts/build_ninja/_deps/zlib-subbuild/zlib-populate-prefix/src/zlib-populate-stamp/zlib-populate-mkdir	de7f67bf68699e0d
+253	6812	8046885227623880	zlib-populate-prefix/src/zlib-populate-stamp/zlib-populate-download	df65b7c5ba66ed19
+253	6812	8046885227623880	C:/Users/Night/dj_MIDI_Watts/build_ninja/_deps/zlib-subbuild/zlib-populate-prefix/src/zlib-populate-stamp/zlib-populate-download	df65b7c5ba66ed19
+6812	7294	8046885227958720	zlib-populate-prefix/src/zlib-populate-stamp/zlib-populate-update	49b062d3bfc31d65
+6812	7294	8046885227958720	C:/Users/Night/dj_MIDI_Watts/build_ninja/_deps/zlib-subbuild/zlib-populate-prefix/src/zlib-populate-stamp/zlib-populate-update	49b062d3bfc31d65
+7295	7547	8046885234787407	zlib-populate-prefix/src/zlib-populate-stamp/zlib-populate-patch	9ff67daff76321b0
+7295	7547	8046885234787407	C:/Users/Night/dj_MIDI_Watts/build_ninja/_deps/zlib-subbuild/zlib-populate-prefix/src/zlib-populate-stamp/zlib-populate-patch	9ff67daff76321b0
+7547	7796	8046885237382411	zlib-populate-prefix/src/zlib-populate-stamp/zlib-populate-configure	53b8f86da547d88b
+7547	7796	8046885237382411	C:/Users/Night/dj_MIDI_Watts/build_ninja/_deps/zlib-subbuild/zlib-populate-prefix/src/zlib-populate-stamp/zlib-populate-configure	53b8f86da547d88b
+7796	8017	8046885239663839	zlib-populate-prefix/src/zlib-populate-stamp/zlib-populate-build	367eb6be3cdd3b2b
+7796	8017	8046885239663839	C:/Users/Night/dj_MIDI_Watts/build_ninja/_deps/zlib-subbuild/zlib-populate-prefix/src/zlib-populate-stamp/zlib-populate-build	367eb6be3cdd3b2b
+8017	8216	8046885241682948	zlib-populate-prefix/src/zlib-populate-stamp/zlib-populate-install	39910a90b7b0f400
+8017	8216	8046885241682948	C:/Users/Night/dj_MIDI_Watts/build_ninja/_deps/zlib-subbuild/zlib-populate-prefix/src/zlib-populate-stamp/zlib-populate-install	39910a90b7b0f400
+8217	8434	8046885243853365	zlib-populate-prefix/src/zlib-populate-stamp/zlib-populate-test	50d27830dacd8f6
+8217	8434	8046885243853365	C:/Users/Night/dj_MIDI_Watts/build_ninja/_deps/zlib-subbuild/zlib-populate-prefix/src/zlib-populate-stamp/zlib-populate-test	50d27830dacd8f6
+8435	8736	8046885246863301	CMakeFiles/zlib-populate-complete	972f288416715b8
+8435	8736	8046885246863301	zlib-populate-prefix/src/zlib-populate-stamp/zlib-populate-done	972f288416715b8
+8435	8736	8046885246863301	C:/Users/Night/dj_MIDI_Watts/build_ninja/_deps/zlib-subbuild/CMakeFiles/zlib-populate-complete	972f288416715b8
+8435	8736	8046885246863301	C:/Users/Night/dj_MIDI_Watts/build_ninja/_deps/zlib-subbuild/zlib-populate-prefix/src/zlib-populate-stamp/zlib-populate-done	972f288416715b8

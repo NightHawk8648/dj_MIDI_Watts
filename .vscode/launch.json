@@ -2,6 +2,201 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "gdbtarget",
+            "request": "attach",
+            "name": "Eclipse CDT GDB Adapter"
+        },
+        {
+            "name": "Flutter",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "Flutter",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart"
+        },
+        {
+            "name": "Flutter: Attach to Device",
+            "type": "dart",
+            "request": "attach"
+        },
+        {
+            "name": "Dart: Run all Tests",
+            "type": "dart",
+            "request": "launch",
+            "program": "./test/"
+        },
+        {
+            "name": "Dart",
+            "type": "dart",
+            "request": "launch",
+            "program": "bin/main.dart"
+        },
+        {
+            "name": "Dart: Attach to Process",
+            "type": "dart",
+            "request": "attach"
+        },
+        {
+            "type": "vscode-edge-devtools.debug",
+            "request": "launch",
+            "name": "Launch Microsoft Edge and open the Edge DevTools",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "name": "Attach to Edge",
+            "port": 9222,
+            "request": "attach",
+            "type": "msedge",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "cmake",
+            "request": "launch",
+            "name": "CMake: Script debugging",
+            "cmakeDebugType": "script",
+            "scriptPath": "${workspaceFolder}/<...>.cmake"
+        },
+        {
+            "type": "cmake",
+            "request": "launch",
+            "name": "CMake: Externally launched",
+            "cmakeDebugType": "external",
+            "pipeName": "<...>"
+        },
+        {
+            "type": "cmake",
+            "request": "launch",
+            "name": "CMake: Configure project",
+            "cmakeDebugType": "configure",
+            "clean": false,
+            "configureAll": false
+        },
+        {
+            "command": "npm start",
+            "name": "Run npm start",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
+            "name": "Dart: Run all Tests",
+            "type": "dart",
+            "request": "launch",
+            "program": "./test/"
+        },
+        {
+            "name": "Dart: Attach to Process",
+            "type": "dart",
+            "request": "attach"
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "Containers: Attach to Node",
+            "remoteRoot": "/usr/src/app"
+        },
+        {
+            "name": "Containers .NET Attach (Preview)",
+            "type": "docker",
+            "request": "attach",
+            "platform": "netCore",
+            "sourceFileMap": {
+                "/src": "${workspaceFolder}"
+            }
+        },
+        {
+            "type": "cmake",
+            "request": "launch",
+            "name": "CMake: Script debugging",
+            "cmakeDebugType": "script",
+            "scriptPath": "${workspaceFolder}/<...>.cmake"
+        },
+        {
+            "type": "cmake",
+            "request": "launch",
+            "name": "CMake: Externally launched",
+            "cmakeDebugType": "external",
+            "pipeName": "<...>"
+        },
+        {
+            "type": "cmake",
+            "request": "launch",
+            "name": "CMake: Configure project",
+            "cmakeDebugType": "configure",
+            "clean": false,
+            "configureAll": false
+        },
+        {
+            "name": "Attach to Kubernetes Pod (Java)",
+            "type": "cloudcode.kubernetes",
+            "request": "attach",
+            "language": "Java",
+            "debugPort": 50005,
+            "podSelector": {
+                "app": "deployment-name"
+            }
+        },
+        {
+            "name": "Attach to Kubernetes Pod (Web Backend)",
+            "type": "cloudcode.kubernetes",
+            "request": "attach",
+            "language": "Node",
+            "debugPort": 9229,
+            "podSelector": {
+                "app": "scorch-grid-web"
+            }
+        },
+        {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "name": "Attach to Chrome",
+            "port": 9222,
+            "request": "attach",
+            "type": "chrome",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "name": "Listen for Xdebug (all ports)",
+            "type": "php",
+            "request": "launch",
+            "port": [
+                9003,
+                9000,
+                9004
+            ]
+        },
+        {
+            "name": "Launch & Profile built-in server",
+            "type": "php",
+            "request": "launch",
+            "noDebug": true,
+            "profile": true,
+            "runtimeArgs": [
+                "-S",
+                "localhost:5555",
+                "-t",
+                "."
+            ],
+            "port": [
+                9003,
+                9000,
+                9004
+            ],
+            "serverReadyAction": {
+                "action": "openExternally"
+            }
+        },
+        {
             "name": "\ud83d\ude80 RUN: Sync Engine (Python)",
             "type": "debugpy",
             "request": "launch",
@@ -12,36 +207,6 @@
                 "--ip",
                 "auto"
             ]
-        },
-        {
-            "name": "\ud83c\udfe5 DIAG: System Health (-RunTests)",
-            "type": "powershell",
-            "request": "launch",
-            "script": "${workspaceFolder}/foo.ps1",
-            "args": [
-                "-RunTests"
-            ],
-            "cwd": "${workspaceFolder}"
-        },
-        {
-            "name": "\u267b\ufe0f  ADMIN: Master Reset (Scorch Grid)",
-            "type": "powershell",
-            "request": "launch",
-            "script": "${workspaceFolder}/foo.ps1",
-            "args": [
-                "-MasterReset"
-            ],
-            "cwd": "${workspaceFolder}"
-        },
-        {
-            "name": "\ud83e\uddf9 SECURITY: Cleanup Vault",
-            "type": "powershell",
-            "request": "launch",
-            "script": "${workspaceFolder}/foo.ps1",
-            "args": [
-                "-CleanupVault"
-            ],
-            "cwd": "${workspaceFolder}"
         },
         {
             "name": "\ud83c\udfd7\ufe0f BUILD: Ultimate Assembly (Gradle)",
@@ -67,8 +232,25 @@
             "args": [
                 "${file}"
             ],
-            "cwd": "${workspaceFolder}",
-            "stopAtEntry": false
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "📱 Flutter: Launch on USB/Emulator",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "cwd": "${workspaceFolder}/flutter_ui"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "⚡ Ultimate: Python Bridge/Sync + Flutter Mobile",
+            "configurations": [
+                "🚀 RUN: Sync Engine (Python)",
+                "🔍 AUDIT: Grid Auditor (Python Agent)",
+                "📱 Flutter: Launch on USB/Emulator"
+            ],
+            "stopAll": true
         }
     ]
 }

@@ -2,5 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/NPM for Antigravity" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build/_deps/zlib-src" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/build_ninja/_deps/zlib-src" vcs="Git" />
   </component>
 </project>

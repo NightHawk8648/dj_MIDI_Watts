@@ -148,23 +148,9 @@
         "cwd": "${workspaceFolder}"
       },
       "group": "build",
-      "problemMatcher": [
-        "$gcc"
-      ]
+      "problemMatcher": []
     },
-    {
-      "type": "iar",
-      "command": "build",
-      "project": "${command:iar-config.project-file}",
-      "config": "${command:iar-config.project-configuration}",
-      "builder": "${command:iar-config.toolchain}/common/bin/iarbuild.exe",
-      "label": "iar: Build Project",
-      "argumentVariablesFile": "${command:iar-config.workspace-file}",
-      "problemMatcher": [
-        "$iar-cc",
-        "$iar-linker"
-      ]
-    },
+
     {
       "label": "Master: Hardened .venv Rebuild",
       "type": "process",
@@ -268,5 +254,6 @@
                 "kind": "build",
                 "isDefault": true
             }
-    }
+        }
+    ]
 }

@@ -31,19 +31,25 @@ class WebUIHost(private val viewModel: CommanderViewModel, private val context: 
             try {
                 serverSocket = ServerSocket()
                 serverSocket?.reuseAddress = true // Allow immediate rebinding after crashes
-                try {
-                    serverSocket?.bind(InetSocketAddress(InetAddress.getByName(bindAddress), port))
-                    viewModel.logMessage("[WEB] Server active at http://${viewModel.localIpAddress}:$port (bound to $bindAddress)")
-                } catch (e: java.net.BindException) {
-                    if (port == 8080) {
-                        viewModel.logMessage("[WARN] Port 8080 in use, falling back to 5555")
+                val configPorts = BuildConfig.SERVER_FALLBACK_PORTS.split(",")
+                    .mapNotNull { it.trim().toIntOrNull() }
+                val portsToTry = (listOf(port) + configPorts).distinct()
+                var boundPort = -1
+                for (p in portsToTry) {
+                    try {
+                        serverSocket?.bind(InetSocketAddress(InetAddress.getByName(bindAddress), p))
+                        boundPort = p
+                        break
+                    } catch (e: java.net.BindException) {
+                        viewModel.logMessage("[WARN] Port $p in use, trying next fallback...")
                         serverSocket = ServerSocket() // Recreate socket if bind failed
                         serverSocket?.reuseAddress = true
-                        serverSocket?.bind(InetSocketAddress(InetAddress.getByName(bindAddress), 5555))
-                        viewModel.logMessage("[WEB] Server active at http://${viewModel.localIpAddress}:5555 (bound to $bindAddress)")
-                    } else {
-                        throw e
                     }
+                }
+                if (boundPort != -1) {
+                    viewModel.logMessage("[WEB] Server active at http://${viewModel.localIpAddress}:$boundPort (bound to $bindAddress)")
+                } else {
+                    throw java.net.BindException("All fallback ports (${BuildConfig.SERVER_FALLBACK_PORTS}) are currently in use.")
                 }
                 while (isRunning) {
                     val socket = serverSocket?.accept() ?: break
