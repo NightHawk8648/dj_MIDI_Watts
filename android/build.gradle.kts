@@ -121,11 +121,11 @@ fun getSecretFromVault(resource: String, username: String): String {
 }
 
 android {
-  namespace = "com.example.djmidiwatts"
+  namespace = "com.example"
   compileSdk = 36
 
   defaultConfig {
-    applicationId = "com.aistudio.djmidiwatts.vbtqkx"
+    applicationId = "com.EXAMPLE"
     minSdk = 24
     targetSdk = 36
     versionCode = 1
