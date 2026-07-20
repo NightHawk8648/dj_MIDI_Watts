@@ -11,7 +11,7 @@ The `cloud_env.env` file acts as the configuration hub for cloud storage, servic
 ### Core Variables Defined
 
 - **GCP_PROJECT_ID**: Target Google Cloud Project ID.
-- **GCP_REGION**: Cloud location (e.g., `us-west1`).
+- **GCP_REGION**: Cloud location (e.g., `YOUR_REGION`).
 - **GCP_STORAGE_BUCKET**: Buckets for user assets, libraries, and application cache storage.
 - **GCP_CLOUD_RUN_URL**: Endpoint routing API queries dynamically to the server backend (Future Implementation).
 
