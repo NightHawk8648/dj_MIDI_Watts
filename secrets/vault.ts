@@ -80,20 +80,20 @@ function createSecuredSecret(val: string | undefined): SecuredSecret | undefined
  */
 export const Vault: MasterSecretVault = {
   // S1: Gemini AI Orchestration Key
-  geminiOrchestrationKey: process.env.UG_S1,
+  geminiOrchestrationKey: process.env.YOUR_ORCHESTRATOR_KEY,
 
   // S2: Google OAuth Client ID
-  googleOAuthClientId: process.env.UG_S2,
+  googleOAuthClientId: process.env.YOUR_CLIENT_ID,
 
   // S3: mTLS / Certificate Settings
   mtls: {
-    clientCrtPath: process.env.UG_CERT_PATH,
-    clientKeyPath: process.env.UG_CERT_KEY,
-    caBundlePath: process.env.UG_CA_BUNDLE,
+    clientCrtPath: process.env.YOUR_CERT_PATH,
+    clientKeyPath: process.env.YOUR_CERT_KEY,
+    caBundlePath: process.env.YOUR_CA_BUNDLE,
   },
 
   // S3: Keystore Settings
-  keystorePassword: process.env.UG_S3_KEYSTORE_PASS,
+  keystorePassword: process.env.YOUR_KEYSTORE_PASS,
 } as const;
 
 /**
