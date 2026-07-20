@@ -7,7 +7,7 @@ param(
 )
 
 $repoRoot = Resolve-Path "${PSScriptRoot}\.."
-$hostUrl = "http://localhost:5555"
+$hostUrl = "http://localhost:8080"
 $buildScript = Join-Path $repoRoot "scripts\build_and_launch.ps1"
 
 function Start-RepairCycle {
