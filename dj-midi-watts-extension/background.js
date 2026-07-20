@@ -2,10 +2,10 @@
  * DJ MIDI WATTS - Background Telemetry Sync Service
  */
 const FALLBACK_SERVERS = [
-    'https://djmidiwatts-live.app',
+    'https://EXAMPLE.COM',
     'http://radeon3:8080',
     'http://localhost:8081', // Remote SSH tunnel default
-    'http://100.100.100.100:8080', // Replace with your Tailscale IP
+    'http://0.0.0.0', // Replace with your Tailscale IP
     'http://localhost:8080'
 ];
 
