@@ -8,5 +8,5 @@
     "attribute.username": "assertion.email.split('@')[0]",
     "attribute.ide_origin": "assertion.origin == 'vscode' ? 'dev_client' : 'android_studio_host'"
   },
-  "attributeCondition": "308012414081-87nplbju9ilom420b0krps5ij0aqunva.apps.googleusercontent.com"
+  "attributeCondition": "YOUR_ATTRIBUTE_CONDITION"
 }
