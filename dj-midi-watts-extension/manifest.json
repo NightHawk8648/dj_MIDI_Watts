@@ -41,7 +41,7 @@
     }
   ],
   "oauth2": {
-    "client_id": "308012414081-87nplbju9ilom420b0krps5ij0aqunva.apps.googleusercontent.com",
+    "client_id": "YOUR_GCP_CLIENT_ID",
     "scopes": ["https://www.googleapis.com/auth/userinfo.email"]
   }
 }
